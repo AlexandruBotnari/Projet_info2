@@ -10,7 +10,7 @@ typedef struct {
 } Environnement;
 
 // Déclaration de la fonction de chargement
-Environnement charger_environnement(const char *chemin_fichier);
+Environnement choix_environnement(const char *chemin_fichier);
 
 #endif
 

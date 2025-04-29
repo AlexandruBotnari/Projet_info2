@@ -1,1 +1,1 @@
-Atlas terre 135 20 60 15 montagne_éternelle
+Atlas terre 135 20 60 15 10 montagne_éternelle

@@ -1,0 +1,1 @@
+zeus foudre 110 50 25 50 foudre_divine

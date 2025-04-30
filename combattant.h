@@ -1,6 +1,5 @@
 #ifndef COMBATTANT_H
 #define COMBATTANT_H
-
 #include "technique.h"
 
 typedef struct {
@@ -12,10 +11,12 @@ typedef struct {
     int agilite;
     int vitesse;
     TechniqueSpeciale techniques[5];
-} Combattant;
-
+    int nb_techniques;
+    char element[50];
+    int charge;
+}Combattant;
+int choix_personnage();
 void afficher_combattant(Combattant c);
 Combattant charger_combattant(char *chemin_fichier);
-
 #endif
 

@@ -1,1 +1,1 @@
-Déméter 140 140 25 35 40 35 plante forêt_ancestrale 
+Déméter 100 100 30 40 35 3 souffle_verdoyant 60 4 "Soigne un allié de 60 PV" 0 4 0

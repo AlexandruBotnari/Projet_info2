@@ -11,5 +11,7 @@ typedef struct {
     int recharge_restante;
 } TechniqueSpeciale;
 
+void afficher_technique_speciale(TechniqueSpeciale t);
+
 #endif
 

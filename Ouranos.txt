@@ -1,1 +1,2 @@
-Ouranos 110 110 35 45 35 30 air tempête_ouragan
+Ouranos 85 85 40 30 50 4 vent_divin 30 3 "Augmente la vitesse d'un allié pendant 3 tours" 3 4 0
+

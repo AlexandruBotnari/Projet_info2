@@ -1,1 +1,2 @@
-Artemis 90 90 60 40 50 45 plante racine_venimeuse "inflige des gros dégats de type plante à un ennemi" 80 0 1 5 0
+Artémis 90 90 65 35 45 4 racine_venimeuse 50 0 "Inflige de lourds dégâts empoisonnés à l'ennemi" 0 4 0
+

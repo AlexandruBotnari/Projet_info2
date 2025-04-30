@@ -9,9 +9,17 @@ void afficher_combattant(Combattant c) {
     printf("Agilite: %d\n", c.agilite);
     printf("Vitesse: %d\n", c.vitesse);
     printf("Element: %s\n", c.element);
-    afficher_technique_speciale(c.techniques);
 }
-
+int choix_personnage(){
+	int p;
+	printf("Quel personnage voulez vous:\nArtémis : 0\nAtlas: 1\nDéméter : 2\nGaia : 3\nHélios : 4\nHéphaistos : 5\nOuranos : 6\nPoséidon : 7\nTéthys : 8\nZeus : 9\n ");
+	scanf("%d", &p);
+	if (p != 1 || p < 0 || p > 9) {
+            printf("❌ Choix invalide, essayez encore.\n");
+            while (getchar() != '\n');
+        }
+	return p;
+}
 Combattant charger_combattant(char *chemin_fichier){
 	Combattant c;
 	FILE* f;
@@ -32,32 +40,7 @@ Combattant charger_combattant(char *chemin_fichier){
            &c.agilite,
            &c.vitesse,
            c.element);
-	
-	fclose(f);
-	return c;
-}
-
-Combattant charger_combattant(char *chemin_fichier){
-	Combattant c;
-	FILE* f;
-	f=fopen(chemin_fichier,"r");
-	if (f == NULL){
-		printf("erreur fopen\n");
-		strcpy(c.nom, "inconnu");
-		c.vie_max = c.vie_courante = c.attaque = c.defense = c.agilite = c.vitesse = 0;
-		strcpy(c.element, "aucun");
-		return c;
-	}
-	fscanf(f, "%s %d %d %d %d %d %d %s",
-           c.nom,
-           &c.vie_max,
-           &c.vie_courante,
-           &c.attaque,
-           &c.defense,
-           &c.agilite,
-           &c.vitesse,
-           c.element);
-	
+	c.charge=0;
 	fclose(f);
 	return c;
 }

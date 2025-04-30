@@ -9,7 +9,7 @@ void afficher_combattant(Combattant c) {
     printf("Agilite: %d\n", c.agilite);
     printf("Vitesse: %d\n", c.vitesse);
     printf("Element: %s\n", c.element);
-    printf("Technique spéciale: %s\n", c.technique.nom);
+    afficher_technique_speciale(c.technique_speciale);
 }
 
 Combattant charger_combattant(char *chemin_fichier){

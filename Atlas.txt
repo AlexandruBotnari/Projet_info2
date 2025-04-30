@@ -1,2 +1,1 @@
-Atlas 135 135 20 60 15 10 terre montagne_éternelle "renforce la défense d'un allié" 2 3 5 0 
-5
+Atlas 135 135 20 60 15 10 terre montagne_éternelle "renforce la défense d'un allié" 2 3 5 0

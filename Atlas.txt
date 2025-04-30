@@ -1,1 +1,3 @@
-Atlas 135 135 20 60 15 10 terre montagne_éternelle "renforce la défense d'un allié" 2 3 5 0
+Atlas 150 150 30 90 40 2 montagne_éternelle 50 2 "Augmente la défense d'un allié pendant 3 tours" 3 5 0
+
+

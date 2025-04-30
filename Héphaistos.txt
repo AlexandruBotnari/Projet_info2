@@ -1,1 +1,1 @@
-Héphaistos feu 130 40 20 20 15 flamme_ébouillante 
+Héphaistos 130 130 40 20 20 15 feu flamme_ébouillante 

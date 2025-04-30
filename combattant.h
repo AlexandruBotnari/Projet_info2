@@ -14,7 +14,8 @@ typedef struct {
     TechniqueSpeciale techniques[5];
 } Combattant;
 
-void afficher_combattant(Combattant c)
+void afficher_combattant(Combattant c);
+Combattant charger_combattant(char *chemin_fichier);
 
 #endif
 

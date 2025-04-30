@@ -1,1 +1,2 @@
-hélios 100 100 55 30 45 40 feu soleil_destructeur 
+Hélios 95 95 60 30 40 4 flammes_solaires 110 0 "Déchaîne une puissante attaque de feu sur l’ennemi" 0 5 0
+

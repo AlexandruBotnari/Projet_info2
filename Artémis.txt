@@ -1,1 +1,1 @@
-Artemis plante 90 60 40 50 45 racine_venimeuse
+Artemis 90 90 60 40 50 45 plante racine_venimeuse

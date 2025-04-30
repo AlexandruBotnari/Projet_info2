@@ -12,7 +12,6 @@ typedef struct {
     int agilite;
     int vitesse;
     TechniqueSpeciale techniques[5];
-    int nb_techniques;
 } Combattant;
 
 #endif

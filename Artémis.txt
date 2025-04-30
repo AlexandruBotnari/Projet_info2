@@ -1,1 +1,1 @@
-Artemis 90 90 60 40 50 45 plante racine_venimeuse
+Artemis 90 90 60 40 50 45 plante racine_venimeuse "fait pousser des racines venimeuse à un ennemi" 50 3 3 3

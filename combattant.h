@@ -14,5 +14,7 @@ typedef struct {
     TechniqueSpeciale techniques[5];
 } Combattant;
 
+void afficher_combattant(Combattant c)
+
 #endif
 

@@ -82,3 +82,38 @@ void utiliser_technique_speciale(Combattant *utilisateur, Combattant *alliés, i
 
     tech->recharge_restante = tech->recharge;
 }
+
+void fin_tour(Combattant *perso) {
+    // Attaque
+    if (perso->buff_attaque_tours > 0) {
+        perso->buff_attaque_tours--;
+        if (perso->buff_attaque_tours == 0) {
+            perso->attaque = perso->attaque_base;
+            printf("%s perd son bonus d'attaque.\n", perso->nom);
+        }
+    }
+
+    // Défense
+    if (perso->buff_defense_tours > 0) {
+        perso->buff_defense_tours--;
+        if (perso->buff_defense_tours == 0) {
+            perso->defense = perso->defense_base;
+            printf("%s perd son bonus de défense.\n", perso->nom);
+        }
+    }
+
+    // Vitesse
+    if (perso->buff_vitesse_tours > 0) {
+        perso->buff_vitesse_tours--;
+        if (perso->buff_vitesse_tours == 0) {
+            perso->vitesse = perso->vitesse_base;
+            printf("%s perd son bonus de vitesse.\n", perso->nom);
+        }
+    }
+
+    // Recharge de la technique spéciale
+    if (perso->techniques.recharge_restante > 0) {
+        perso->techniques.recharge_restante--;
+    }
+}
+

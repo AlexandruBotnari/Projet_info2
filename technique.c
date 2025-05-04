@@ -53,17 +53,20 @@ void utiliser_technique_speciale(Combattant *utilisateur, Combattant *alliés, i
 
         case 1: // Buff attaque
             cible->attaque += tech->valeur;
+            cible->buff_attaque_tours = tech->tours_actifs;
             printf("%s gagne +%d en attaque pour %d tours !\n", cible->nom, tech->valeur, tech->tours_actifs);
             break;
 
         case 2: // Buff défense
             cible->defense += tech->valeur;
+            cible->buff_defense_tours = tech->tours_actifs;
             printf("%s gagne +%d en défense pour %d tours !\n", cible->nom, tech->valeur, tech->tours_actifs);
             break;
 
         case 3: // Buff vitesse
             if (cible->vitesse + tech->valeur <= 4)
                 cible->vitesse += tech->valeur;
+                cible->buff_vitesse_tours = tech->tours_actifs;
             else
                 cible->vitesse = 4;
             printf("%s gagne +%d en vitesse pour %d tours !\n", cible->nom, tech->valeur, tech->tours_actifs);

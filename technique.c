@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include "technique.h"
 #include "combattant.h"
 
 Combattant* choisir_cible(Combattant *liste, int nb, const char *type) {

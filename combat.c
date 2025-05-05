@@ -4,13 +4,7 @@
 #include "combat.h"
 #include "equipe.h"
 #include "combattant.h"
-#include "technique.h"
-typedef struct {
-    Combattant *combattant;
-    Equipe *equipe_att;
-    Equipe *equipe_def;
-}OrdreCombattant;
-
+#include "techniques.h"
 void jouer_combat(Equipe *e1, Equipe *e2){
 	srand(time(NULL));
 	while (!equipe_est_vaincue(e1) && !equipe_est_vaincue(e2)){

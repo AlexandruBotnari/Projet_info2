@@ -20,11 +20,9 @@ Combattant* choisir_cible(Combattant *liste, int nb, const char *type) {
     }
 
     printf("Cible introuvable, action annulée.\n");
-    return NULL;
-}
 
 void utiliser_technique_speciale(Combattant *utilisateur, Combattant *alliés, int nb_alliés, Combattant *ennemis, int nb_ennemis) {
-    TechniqueSpeciale *tech = &utilisateur->techniques;
+    TechniqueSpeciale *tech = &utilisateur->technique;
 
     if (tech->recharge_restante > 0) {
         printf("%s ne peut pas utiliser %s (recharge restante : %d tours)\n", utilisateur->nom, tech->nom, tech->recharge_restante);
@@ -64,11 +62,12 @@ void utiliser_technique_speciale(Combattant *utilisateur, Combattant *alliés, i
             break;
 
         case 3: // Buff vitesse
-            if (cible->vitesse + tech->valeur <= 4)
+            if (cible->vitesse + tech->valeur <= 4) {
                 cible->vitesse += tech->valeur;
-                cible->buff_vitesse_tours = tech->tours_actifs;
-            else
+            } else {
                 cible->vitesse = 4;
+            }
+            cible->buff_vitesse_tours = tech->tours_actifs;
             printf("%s gagne +%d en vitesse pour %d tours !\n", cible->nom, tech->valeur, tech->tours_actifs);
             break;
 
@@ -82,6 +81,7 @@ void utiliser_technique_speciale(Combattant *utilisateur, Combattant *alliés, i
 
     tech->recharge_restante = tech->recharge;
 }
+
 
 void fin_tour(Combattant *perso) {
     // Attaque

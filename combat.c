@@ -83,3 +83,24 @@ int choix_cible_a_attaquer(Equipe defenseur){
 	}
 	return i;
 }
+
+int calculer_degats_generique(int valeur_base,int valeur_defense,const char *type_attaquant,const char *type_defenseur, Environnement env) {
+    float coeff = 1.0;
+
+    // Bonus environnement : type avantage attaque type désavantage
+    if (strcmp(type_attaquant, env.type_bonus) == 0 &&
+        strcmp(type_defenseur, env.type_malus) == 0) {
+        coeff *= env.coeff_bonus;
+    }
+
+    // Malus environnement : type désavantage attaque type avantage
+    else if (strcmp(type_attaquant, env.type_malus) == 0 &&
+             strcmp(type_defenseur, env.type_bonus) == 0) {
+        coeff *= env.coeff_malus;
+    }
+
+    float degats_f = valeur_base - valeur_defense;
+    if (degats_f < 1.0f) degats_f = 1.0f;
+
+    return (int)round(degats_f * coeff);
+}

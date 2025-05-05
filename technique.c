@@ -3,6 +3,29 @@
 #include "technique.h"
 #include "combattant.h"
 
+TechniqueSpeciale charger_TechniqueSpeciale(char *chemin_fichier){
+	TechniqueSpeciale t;
+	FILE* f;
+	f=fopen(chemin_fichier,"r");
+	if (f == NULL){
+		printf("erreur fopen\n");
+		strcpy(t.nom, "inconnu");
+        strcpy(t.description, "aucun");
+		t.valeur = t.type_effet = t.tours_actifs = t.recharge = t.recharge_restante = 0;
+		return t;
+	}
+	fscanf(f, "%s %d %d \"%[^\"]\" %d %d %d",
+           t.nom,
+           &t.valeur,
+           &t.type_effet,
+           t.description,
+           &t.tours_actifs,
+           &t.recharge,
+           &t.recharge_restante);
+    fclose(f);
+	return t;
+}
+
 Combattant* choisir_cible(Combattant *liste, int nb, const char *type) {
     char nom_cible[50];
     printf("Choisissez une cible %s :\n", type);

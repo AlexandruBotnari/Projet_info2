@@ -67,7 +67,7 @@ void utiliser_technique_speciale(Combattant *utilisateur, Combattant *alliés, i
 
     switch (tech->type_effet) {
         case 0: // Attaque puissante
-	    int degat=calculer_degats_generique(tech->valeur,cible->defense,utilisateur->type,cyble->type,env);
+	    int degat=calculer_degats_generique(tech->valeur,cible->defense,utilisateur->type,cible->type,env);
             cible->vie_courante -= degat;
             if (cible->vie_courante < 0) cible->vie_courante = 0;
             printf("%s subit %d dégâts ! PV restants : %d/%d\n", cible->nom, degat, cible->vie_courante, cible->vie_max);

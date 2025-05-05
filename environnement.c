@@ -26,4 +26,3 @@ Environnement charger_environnement(char *chemin_fichier) {
     fclose(f);
     return e;
 }
-

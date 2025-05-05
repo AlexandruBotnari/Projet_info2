@@ -1,4 +1,4 @@
-#ifndef EQUIPE_H
+
 #define EQUIPE_H
 #include "combattant.h"
 typedef struct{
@@ -9,4 +9,4 @@ typedef struct{
 Equipe creer_equipe();
 void afficher_equipe(Equipe e);
 int equipe_est_vaincue(Equipe e);
-#endif	
+

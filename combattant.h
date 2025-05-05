@@ -1,4 +1,3 @@
-#ifndef COMBATTANT_H
 #define COMBATTANT_H
 #include "technique.h"
 
@@ -10,6 +9,10 @@ typedef struct {
     int defense;
     int agilite;
     int vitesse;
+    TechniqueSpeciale techniques[5];
+    int nb_techniques;
+    char element[50];
+    int charge;
     int attaque_base;
     int defense_base;
     int vitesse_base;
@@ -18,9 +21,7 @@ typedef struct {
     int buff_vitesse_tour;
     TechniqueSpeciale technique; 
 }Combattant;
-
 int choix_personnage();
 void afficher_combattant(Combattant c);
 Combattant charger_combattant(char *chemin_fichier);
-#endif
 

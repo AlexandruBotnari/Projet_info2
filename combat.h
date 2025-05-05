@@ -1,19 +1,10 @@
-#ifndef COMBATTANT_H
-#define COMBATTANT_H
-#include "technique.h"
-
+#define COMBAT_H
+#include "equipe.h" 
 typedef struct {
-    char nom[50];
-    int vie_max;
-    int vie_courante;
-    int attaque;
-    int defense;
-    int agilite;
-    int vitesse;
-    TechniqueSpeciale techniques;
-}Combattant;
-int choix_personnage();
-void afficher_combattant(Combattant c);
-Combattant charger_combattant(char *chemin_fichier);
-#endif
-
+    Combattant *combattant;
+    Equipe *equipe_att;
+    Equipe *equipe_def;
+}OrdreCombattant;
+void jouer_combat(Equipe *e1, Equipe *e2);
+void jouer_tour(Equipe *e1, Equipe *e2);
+int choix_cible_a_attaquer(Equipe defenseur);

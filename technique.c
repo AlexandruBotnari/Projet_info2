@@ -44,7 +44,7 @@ Combattant* choisir_cible(Combattant *liste, int nb, const char *type) {
 
     printf("Cible introuvable, action annulée.\n");
 
-void utiliser_technique_speciale(Combattant *utilisateur, Combattant *alliés, int nb_alliés, Combattant *ennemis, int nb_ennemis) {
+void utiliser_technique_speciale(Combattant *utilisateur, Combattant *alliés, int nb_alliés, Combattant *ennemis, int nb_ennemis,Environnement env) {
     TechniqueSpeciale *tech = &utilisateur->technique;
 
     if (tech->recharge_restante > 0) {
@@ -67,10 +67,10 @@ void utiliser_technique_speciale(Combattant *utilisateur, Combattant *alliés, i
 
     switch (tech->type_effet) {
         case 0: // Attaque puissante
-	    int degat=calculer_degat_generique(tech->valeur,cible->defense,utilisateur->type,cyble->type);
+	    int degat=calculer_degat_generique(tech->valeur,cible->defense,utilisateur->type,cyble->type,env);
             cible->vie_courante -= degat;
             if (cible->vie_courante < 0) cible->vie_courante = 0;
-            printf("%s subit %d dégâts ! PV restants : %d/%d\n", cible->nom, tech->valeur, cible->vie_courante, cible->vie_max);
+            printf("%s subit %d dégâts ! PV restants : %d/%d\n", cible->nom, degat, cible->vie_courante, cible->vie_max);
             break;
 
         case 1: // Buff attaque

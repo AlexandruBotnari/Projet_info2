@@ -14,7 +14,7 @@ int choix_personnage(){
 	int p;
 	printf("Quel personnage voulez vous:\nArtémis : 0\nAtlas: 1\nDéméter : 2\nGaia : 3\nHélios : 4\nHéphaistos : 5\nOuranos : 6\nPoséidon : 7\nTéthys : 8\nZeus : 9\n ");
 	scanf("%d", &p);
-	if (p != 1 || p < 0 || p > 9) {
+	if ( p < 0 || p > 9) {
             printf("❌ Choix invalide, essayez encore.\n");
             while (getchar() != '\n');
         }

@@ -4,7 +4,7 @@
 #include "combat.h"
 #include "equipe.h"
 #include "combattant.h"
-#include "techniques.h"
+#include "technique.h"
 typedef struct {
     Combattant *combattant;
     Equipe *equipe_att;

@@ -43,6 +43,7 @@ Combattant* choisir_cible(Combattant *liste, int nb, const char *type) {
     }
 
     printf("Cible introuvable, action annulée.\n");
+}
 
 void utiliser_technique_speciale(Combattant *utilisateur, Combattant *alliés, int nb_alliés, Combattant *ennemis, int nb_ennemis,Environnement env) {
     TechniqueSpeciale *tech = &utilisateur->technique;

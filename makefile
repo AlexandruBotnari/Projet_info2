@@ -1,7 +1,7 @@
 # CY fighters 3v3
 PROG = projet
 # Sources existantes
-SRC = main.c joueur.c combat.c combattant.c interface.c technique.c utils.c equipe.c
+SRC = main.c joueur.c combat.c combattant.c interface.c technique.c utils.c equipe.c environnement.c
 # Compilation et exécution
 all: $(PROG)
 	./$(PROG)

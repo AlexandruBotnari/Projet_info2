@@ -104,3 +104,37 @@ int calculer_degats_generique(int valeur_base,int valeur_defense,const char *typ
 
     return (int)round(degats_f * coeff);
 }
+
+void fin_tour(Combattant *perso) {
+    // Attaque
+    if (perso->buff_attaque_tours > 0) {
+        perso->buff_attaque_tours--;
+        if (perso->buff_attaque_tours == 0) {
+            perso->attaque = perso->attaque_base;
+            printf("%s perd son bonus d'attaque.\n", perso->nom);
+        }
+    }
+
+    // Défense
+    if (perso->buff_defense_tours > 0) {
+        perso->buff_defense_tours--;
+        if (perso->buff_defense_tours == 0) {
+            perso->defense = perso->defense_base;
+            printf("%s perd son bonus de défense.\n", perso->nom);
+        }
+    }
+
+    // Vitesse
+    if (perso->buff_vitesse_tours > 0) {
+        perso->buff_vitesse_tours--;
+        if (perso->buff_vitesse_tours == 0) {
+            perso->vitesse = perso->vitesse_base;
+            printf("%s perd son bonus de vitesse.\n", perso->nom);
+        }
+    }
+
+    // Recharge de la technique spéciale
+    if (perso->techniques.recharge_restante > 0) {
+        perso->techniques.recharge_restante--;
+    }
+}

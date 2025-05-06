@@ -11,7 +11,8 @@ typedef struct {
     int recharge_restante;
 } TechniqueSpeciale;
 
-void afficher_technique_speciale(TechniqueSpeciale t);
+TechniqueSpeciale charger_TechniqueSpeciale(char *chemin_fichier);
+void utiliser_technique_speciale(Combattant *utilisateur, Combattant *alliés, int nb_alliés, Combattant *ennemis, int nb_ennemis,Environnement env);
 
 #endif
 

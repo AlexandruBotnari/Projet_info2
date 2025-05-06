@@ -1,4 +1,4 @@
-#ifnef COMBATTANT_H
+#ifdef COMBATTANT_H
 #define COMBATTANT_H
 #include "technique.h"
 

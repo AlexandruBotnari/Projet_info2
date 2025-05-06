@@ -12,7 +12,7 @@ typedef struct {
 } TechniqueSpeciale;
 
 TechniqueSpeciale charger_TechniqueSpeciale(char *chemin_fichier);
-void utiliser_technique_speciale(Combattant *utilisateur, Combattant *alliés, int nb_alliés, Combattant *ennemis, int nb_ennemis,Environnement env);
+void utiliser_technique_speciale( Combattant *utilisateur,Equipe *equipe_joueur,Equipe *equipe_adverse,Environnement env);
 
 #endif
 

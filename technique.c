@@ -2,6 +2,7 @@
 #include <string.h>
 #include "technique.h"
 #include "combattant.h"
+#include "environnement.h"
 
 TechniqueSpeciale charger_TechniqueSpeciale(char *chemin_fichier){
 	TechniqueSpeciale t;

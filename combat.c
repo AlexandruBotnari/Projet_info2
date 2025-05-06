@@ -4,7 +4,9 @@
 #include "combat.h"
 #include "equipe.h"
 #include "combattant.h"
-#include "techniques.h"
+#include "technique.h"
+#include "environnement.h"
+
 void jouer_combat(Equipe *e1, Equipe *e2){
 	srand(time(NULL));
 	while (!equipe_est_vaincue(e1) && !equipe_est_vaincue(e2)){

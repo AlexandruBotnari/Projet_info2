@@ -1,4 +1,4 @@
-#ifnded COMBAT_H
+#ifdef COMBAT_H
 #define COMBAT_H
 #include "equipe.h" 
 typedef struct {

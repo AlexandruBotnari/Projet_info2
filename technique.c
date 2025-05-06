@@ -26,23 +26,16 @@ TechniqueSpeciale charger_TechniqueSpeciale(char *chemin_fichier){
 	return t;
 }
 
-Combattant* choisir_cible(Combattant *liste, int nb, const char *type) {
-    char nom_cible[50];
-    printf("Choisissez une cible %s :\n", type);
-    for (int i = 0; i < nb; i++) {
-        printf("- %s (PV: %d/%d)\n", liste[i].nom, liste[i].vie_courante, liste[i].vie_max);
-    }
-
-    printf("Nom de la cible : ");
-    scanf("%s", nom_cible);
-
-    for (int i = 0; i < nb; i++) {
-        if (strcmp(liste[i].nom, nom_cible) == 0) {
-            return &liste[i];
-        }
-    }
-
-    printf("Cible introuvable, action annulée.\n");
+int choix_cible_a_attaquer(Equipe defenseur){
+	int i;
+	printf("Quel numéro de combattant voulez-vous attaquer ?\n");
+	scanf("%d", &i);
+	while (defenseur.combattants[i].vie_courante<1){
+		printf("Personnage mort veuillez en choisir un autre\n");
+		printf("Quel numéro combattant voulez-vous attaquer ?\n");
+		scanf("%d", &i);
+	}
+	return i;
 }
 
 void utiliser_technique_speciale(Combattant *utilisateur, Combattant *alliés, int nb_alliés, Combattant *ennemis, int nb_ennemis,Environnement env) {
@@ -106,6 +99,110 @@ void utiliser_technique_speciale(Combattant *utilisateur, Combattant *alliés, i
 
     tech->recharge_restante = tech->recharge;
 }
+
+void utiliser_technique_speciale(
+    Combattant *utilisateur,
+    Equipe *equipe_joueur,
+    Equipe *equipe_adverse,
+    Environnement env
+) {
+    TechniqueSpeciale *tech = &utilisateur->technique;
+
+    // 🔒 Vérification de la recharge
+    if (tech->recharge_restante > 0) {
+        printf("%s ne peut pas utiliser %s (recharge : %d tours restantes).\n",
+               utilisateur->nom, tech->nom, tech->recharge_restante);
+        return;
+    }
+
+    Combattant *cible = NULL;
+
+    // 🎯 Sélection de la cible
+    if (tech->type_effet == 0) {
+        // Cas attaque : on utilise ta fonction
+        int index = choix_cible_a_attaquer(*equipe_adverse);
+        cible = &equipe_adverse->combattants[index];
+    } else {
+        // Cas buff/soin : on choisit un allié vivant
+        char nom_cible[50];
+        printf("Sur quel allié appliquer %s ?\n", tech->nom);
+        for (int i = 0; i < equipe_joueur->nb_combattants; i++) {
+            Combattant *c = &equipe_joueur->combattants[i];
+            printf("- %s (PV : %d/%d)\n", c->nom, c->vie_courante, c->vie_max);
+        }
+
+        printf("Nom de l'allié ciblé : ");
+        scanf("%s", nom_cible);
+
+        for (int i = 0; i < equipe_joueur->nb_combattants; i++) {
+            if (strcmp(equipe_joueur->combattants[i].nom, nom_cible) == 0) {
+                cible = &equipe_joueur->combattants[i];
+                break;
+            }
+        }
+
+        if (cible == NULL) {
+            printf("Cible invalide. Action annulée.\n");
+            return;
+        }
+    }
+
+    // 🌀 Affichage
+    printf("\n%s utilise %s sur %s !\n", utilisateur->nom, tech->nom, cible->nom);
+    printf(">> %s\n", tech->description);
+
+    // ⚙️ Application de l’effet
+    switch (tech->type_effet) {
+        case 0: { // Attaque puissante
+            int degats = calculer_degats_generique(
+                tech->valeur,
+                cible->defense,
+                utilisateur->type,
+                cible->type,
+                env
+            );
+            cible->vie_courante -= degats;
+            if (cible->vie_courante < 0) cible->vie_courante = 0;
+            printf("%s subit %d dégâts ! PV : %d/%d\n",
+                   cible->nom, degats, cible->vie_courante, cible->vie_max);
+            break;
+        }
+
+        case 1: // Buff attaque
+            cible->attaque += tech->valeur;
+            cible->buff_attaque_tours = tech->tours_actifs;
+            printf("%s gagne +%d attaque pour %d tours !\n",
+                   cible->nom, tech->valeur, tech->tours_actifs);
+            break;
+
+        case 2: // Buff défense
+            cible->defense += tech->valeur;
+            cible->buff_defense_tours = tech->tours_actifs;
+            printf("%s gagne +%d défense pour %d tours !\n",
+                   cible->nom, tech->valeur, tech->tours_actifs);
+            break;
+
+        case 3: // Buff vitesse
+            cible->vitesse += tech->valeur;
+            if (cible->vitesse > 4) cible->vitesse = 4;
+            cible->buff_vitesse_tours = tech->tours_actifs;
+            printf("%s gagne +%d vitesse pour %d tours !\n",
+                   cible->nom, tech->valeur, tech->tours_actifs);
+            break;
+
+        case 4: // Soin
+            cible->vie_courante += tech->valeur;
+            if (cible->vie_courante > cible->vie_max)
+                cible->vie_courante = cible->vie_max;
+            printf("%s récupère %d PV ! PV actuels : %d/%d\n",
+                   cible->nom, tech->valeur, cible->vie_courante, cible->vie_max);
+            break;
+    }
+
+    // 🔁 Réinitialisation de la recharge
+    tech->recharge_restante = tech->recharge;
+}
+
 
 
 void fin_tour(Combattant *perso) {

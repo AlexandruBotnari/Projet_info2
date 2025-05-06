@@ -8,3 +8,4 @@ typedef struct {
 void jouer_combat(Equipe *e1, Equipe *e2);
 void jouer_tour(Equipe *e1, Equipe *e2);
 int choix_cible_a_attaquer(Equipe defenseur);
+void fin_tour(Combattant *perso);

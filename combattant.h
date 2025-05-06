@@ -1,3 +1,4 @@
+#ifnef COMBATTANT_H
 #define COMBATTANT_H
 #include "technique.h"
 
@@ -24,4 +25,6 @@ typedef struct {
 int choix_personnage();
 void afficher_combattant(Combattant c);
 Combattant charger_combattant(char *chemin_fichier);
+
+#endif
 

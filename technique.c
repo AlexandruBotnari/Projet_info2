@@ -26,104 +26,25 @@ TechniqueSpeciale charger_TechniqueSpeciale(char *chemin_fichier){
 	return t;
 }
 
-int choix_cible_a_attaquer(Equipe defenseur){
-	int i;
-	printf("Quel numéro de combattant voulez-vous attaquer ?\n");
-	scanf("%d", &i);
-	while (defenseur.combattants[i].vie_courante<1){
-		printf("Personnage mort veuillez en choisir un autre\n");
-		printf("Quel numéro combattant voulez-vous attaquer ?\n");
-		scanf("%d", &i);
-	}
-	return i;
-}
-
-void utiliser_technique_speciale(Combattant *utilisateur, Combattant *alliés, int nb_alliés, Combattant *ennemis, int nb_ennemis,Environnement env) {
+void utiliser_technique_speciale( Combattant *utilisateur,Equipe *equipe_joueur,Equipe *equipe_adverse,Environnement env) {
     TechniqueSpeciale *tech = &utilisateur->technique;
 
+    // Vérification de la recharge
     if (tech->recharge_restante > 0) {
-        printf("%s ne peut pas utiliser %s (recharge restante : %d tours)\n", utilisateur->nom, tech->nom, tech->recharge_restante);
-        return;
-    }
-
-    // Choix de la cible
-    Combattant *cible = NULL;
-    if (tech->type_effet == 0) {
-        cible = choisir_cible(ennemis, nb_ennemis, "ennemie");
-    } else {
-        cible = choisir_cible(alliés, nb_alliés, "alliée");
-    }
-
-    if (cible == NULL) return;
-
-    printf("\n%s utilise %s sur %s !\n", utilisateur->nom, tech->nom, cible->nom);
-    printf(">> %s\n", tech->description);
-
-    switch (tech->type_effet) {
-        case 0: // Attaque puissante
-	    int degat=calculer_degats_generique(tech->valeur,cible->defense,utilisateur->type,cible->type,env);
-            cible->vie_courante -= degat;
-            if (cible->vie_courante < 0) cible->vie_courante = 0;
-            printf("%s subit %d dégâts ! PV restants : %d/%d\n", cible->nom, degat, cible->vie_courante, cible->vie_max);
-            break;
-
-        case 1: // Buff attaque
-            cible->attaque += tech->valeur;
-            cible->buff_attaque_tours = tech->tours_actifs;
-            printf("%s gagne +%d en attaque pour %d tours !\n", cible->nom, tech->valeur, tech->tours_actifs);
-            break;
-
-        case 2: // Buff défense
-            cible->defense += tech->valeur;
-            cible->buff_defense_tours = tech->tours_actifs;
-            printf("%s gagne +%d en défense pour %d tours !\n", cible->nom, tech->valeur, tech->tours_actifs);
-            break;
-
-        case 3: // Buff vitesse
-            if (cible->vitesse + tech->valeur <= 4) {
-                cible->vitesse += tech->valeur;
-            } else {
-                cible->vitesse = 4;
-            }
-            cible->buff_vitesse_tours = tech->tours_actifs;
-            printf("%s gagne +%d en vitesse pour %d tours !\n", cible->nom, tech->valeur, tech->tours_actifs);
-            break;
-
-        case 4: // Soins
-            cible->vie_courante += tech->valeur;
-            if (cible->vie_courante > cible->vie_max)
-                cible->vie_courante = cible->vie_max;
-            printf("%s récupère %d PV ! PV actuels : %d/%d\n", cible->nom, tech->valeur, cible->vie_courante, cible->vie_max);
-            break;
-    }
-
-    tech->recharge_restante = tech->recharge;
-}
-
-void utiliser_technique_speciale(
-    Combattant *utilisateur,
-    Equipe *equipe_joueur,
-    Equipe *equipe_adverse,
-    Environnement env
-) {
-    TechniqueSpeciale *tech = &utilisateur->technique;
-
-    // 🔒 Vérification de la recharge
-    if (tech->recharge_restante > 0) {
-        printf("%s ne peut pas utiliser %s (recharge : %d tours restantes).\n",
+        printf("%s ne peut pas utiliser %s (recharge restante : %d tours).\n",
                utilisateur->nom, tech->nom, tech->recharge_restante);
         return;
     }
 
     Combattant *cible = NULL;
 
-    // 🎯 Sélection de la cible
+    // Choix de la cible
     if (tech->type_effet == 0) {
-        // Cas attaque : on utilise ta fonction
+        // Cas attaque → on utilise ta fonction telle quelle
         int index = choix_cible_a_attaquer(*equipe_adverse);
         cible = &equipe_adverse->combattants[index];
     } else {
-        // Cas buff/soin : on choisit un allié vivant
+        // Cas buff/soin → on saisit le nom d’un allié
         char nom_cible[50];
         printf("Sur quel allié appliquer %s ?\n", tech->nom);
         for (int i = 0; i < equipe_joueur->nb_combattants; i++) {
@@ -142,16 +63,16 @@ void utiliser_technique_speciale(
         }
 
         if (cible == NULL) {
-            printf("Cible invalide. Action annulée.\n");
+            printf("❌ Cible invalide. Action annulée.\n");
             return;
         }
     }
 
-    // 🌀 Affichage
-    printf("\n%s utilise %s sur %s !\n", utilisateur->nom, tech->nom, cible->nom);
-    printf(">> %s\n", tech->description);
+    // Affichage principal
+    printf("\n🌀 %s utilise %s sur %s !\n", utilisateur->nom, tech->nom, cible->nom);
+    printf(">> 📝 %s\n", tech->description);
 
-    // ⚙️ Application de l’effet
+    // Application de l’effet
     switch (tech->type_effet) {
         case 0: { // Attaque puissante
             int degats = calculer_degats_generique(
@@ -161,9 +82,22 @@ void utiliser_technique_speciale(
                 cible->type,
                 env
             );
+
+            // Affichage des effets environnementaux
+            if (strcmp(utilisateur->type, env.type_bonus) == 0 &&
+                strcmp(cible->type, env.type_malus) == 0) {
+                printf("🔥 L’environnement (%s) renforce l’attaque de %s ! (Bonus ×%.1f)\n",
+                       env.nom, utilisateur->nom, env.coeff_bonus);
+            }
+            else if (strcmp(utilisateur->type, env.type_malus) == 0 &&
+                     strcmp(cible->type, env.type_bonus) == 0) {
+                printf("🌱 L’environnement (%s) affaiblit l’attaque de %s… (Malus ×%.1f)\n",
+                       env.nom, utilisateur->nom, env.coeff_malus);
+            }
+
             cible->vie_courante -= degats;
             if (cible->vie_courante < 0) cible->vie_courante = 0;
-            printf("%s subit %d dégâts ! PV : %d/%d\n",
+            printf("💥 %s subit %d dégâts ! PV restants : %d/%d\n",
                    cible->nom, degats, cible->vie_courante, cible->vie_max);
             break;
         }
@@ -171,14 +105,14 @@ void utiliser_technique_speciale(
         case 1: // Buff attaque
             cible->attaque += tech->valeur;
             cible->buff_attaque_tours = tech->tours_actifs;
-            printf("%s gagne +%d attaque pour %d tours !\n",
+            printf("⚔️ %s gagne +%d en attaque pour %d tours !\n",
                    cible->nom, tech->valeur, tech->tours_actifs);
             break;
 
         case 2: // Buff défense
             cible->defense += tech->valeur;
             cible->buff_defense_tours = tech->tours_actifs;
-            printf("%s gagne +%d défense pour %d tours !\n",
+            printf("🛡️ %s gagne +%d en défense pour %d tours !\n",
                    cible->nom, tech->valeur, tech->tours_actifs);
             break;
 
@@ -186,23 +120,22 @@ void utiliser_technique_speciale(
             cible->vitesse += tech->valeur;
             if (cible->vitesse > 4) cible->vitesse = 4;
             cible->buff_vitesse_tours = tech->tours_actifs;
-            printf("%s gagne +%d vitesse pour %d tours !\n",
+            printf("💨 %s gagne +%d en vitesse pour %d tours !\n",
                    cible->nom, tech->valeur, tech->tours_actifs);
             break;
 
-        case 4: // Soin
+        case 4: // Soins
             cible->vie_courante += tech->valeur;
             if (cible->vie_courante > cible->vie_max)
                 cible->vie_courante = cible->vie_max;
-            printf("%s récupère %d PV ! PV actuels : %d/%d\n",
+            printf("❤️ %s récupère %d PV ! PV actuels : %d/%d\n",
                    cible->nom, tech->valeur, cible->vie_courante, cible->vie_max);
             break;
     }
 
-    // 🔁 Réinitialisation de la recharge
+    // Recharge
     tech->recharge_restante = tech->recharge;
 }
-
 
 
 void fin_tour(Combattant *perso) {

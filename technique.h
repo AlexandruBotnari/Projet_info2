@@ -1,4 +1,4 @@
-#ifndef TECHNIQUE_H
+#ifdef TECHNIQUE_H
 #define TECHNIQUE_H
 
 typedef struct {

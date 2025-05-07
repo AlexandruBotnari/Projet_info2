@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdio.h>
 
-Environnement charger_environnement(char *chemin_fichier) {
+Environnement charger_environnement(const char *chemin_fichier) {
     Environnement e;
     FILE* f = fopen(chemin_fichier, "r");
 

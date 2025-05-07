@@ -42,10 +42,10 @@ make
 # Lancer le programme
 ./bin/projet
 
-# Exemple de simulation avec équipes définies :
+Exemple de simulation avec équipes définies :
 ./bin/projet --team1 Zeus,Artemis --team2 Hadès,Poséidon --env Montagne
 
-# Options disponibles
+Options disponibles
 --verbose : affiche le détail de chaque round
 --log <fichier> : exporte les résultats dans un fichier .txt
 

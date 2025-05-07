@@ -1,4 +1,4 @@
-Atlas 150 150 30 90 15 2 montagne_éternelle 50 2 "Augmente la défense d'un allié pendant 3 tours" 3 5 0
+Atlas 150 150 30 90 15 2 0 montagne_éternelle 50 2 "Augmente la défense d'un allié pendant 3 tours" 3 5 0
 
 
 

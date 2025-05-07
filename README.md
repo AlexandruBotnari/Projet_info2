@@ -3,12 +3,15 @@
 Ce projet implémente en C une **simulation de combats mythologiques au tour par tour** pour 1 ou 2 joueurs.  
 Chaque joueur constitue son équipe en sélectionnant des combattants prédéfinis, chargés depuis des fichiers `data/*.txt`, puis s’affronte jusqu’à ce qu’une équipe soit complètement mise K.O.
 
+---
+
 ## Contenu du projet
 
-Le dépôt contient :
+Le dépôt contient les fichiers suivants :
 
 - **README.md** : documentation (ce fichier).
 - **Makefile** : script de compilation.
+- **bin/** : dossier contenant le binaire produit (`projet`).
 - **src/** : code source en C :
   - `combat.c`, `combat.h` : logique de simulation de combat
   - `combattant.c`, `combattant.h` : chargement et gestion des entités
@@ -16,10 +19,12 @@ Le dépôt contient :
   - `environnement.c`, `environnement.h` : effets et modificateurs globaux
   - `technique.c`, `technique.h` : stratégies de combat
   - `interface.c`, `interface.h` : affichage et options CLI
-- **data/** : fichiers `.txt` décrivant les divinités et les environnements :
-  - `template_divinite.txt`
-  - `template_env.txt`
-- **bin/** : dossier contenant le binaire produit (`projet`).
+- **data/** : fichiers `.txt` décrivant
+- les divinités (ex : `Zeus.txt`, `Athena.txt`, ...)
+- les environnements (ex : `Montagne.txt`, `Orage.txt`)
+- des fichiers modèles : `template_divinite.txt`, `template_env.txt`
+
+---
 
 ## Installation
 
@@ -30,13 +35,37 @@ Le dépôt contient :
 
 
 # Compiler le projet
-gmake # ou make
+make
 
 
-## Usage
+## Utilisation
 # Lancer le programme
-./projet
+./bin/projet
 
+# Exemple de simulation avec équipes définies :
+./bin/projet --team1 Zeus,Artemis --team2 Hadès,Poséidon --env Montagne
+
+# Options disponibles
+--verbose : affiche le détail de chaque round
+--log <fichier> : exporte les résultats dans un fichier .txt
+
+# Fichiers de données
+Les fichiers .txt du dossier data/ contiennent les caractéristiques des divinités et des environnements.
+
+Exemple pour une divinité :
+
+Name: Zeus
+Health: 100
+Attack: 25
+Defense: 10
+Special: Foudre
+
+Exemple pour un environnement :
+
+Name: Montagne
+HealthMod: -10
+AttackMod: 0
+DefenseMod: 5
 
 ## Configuration des données
 * Les fichiers `.txt` contiennent les caractéristiques des divinités (ex. : `Zeus.txt`, `Artémis.txt`, …) et des environnements (`montagne.txt`, `orage.txt`, …).
@@ -61,9 +90,10 @@ Projet_info2/
 2. Créer une branche `feature/<nom_feature>` 
 3. Soumettre une Pull Request
 
-## Licence
-Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
-
 ## Auteur
+- THOMAS Milo
+- BOTNARI Alexandru
+- KI-ZERBO William
+
 
 

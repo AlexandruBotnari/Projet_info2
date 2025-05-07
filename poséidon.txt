@@ -1,2 +1,2 @@
-Poséidon 100 100 58 32 38 4 vague_colossale 105 0 "Déferle une vague destructrice sur un ennemi" 0 5 0
+Poséidon 100 100 58 32 38 4 0 eau vague_colossale 105 0 "Déferle une vague destructrice sur un ennemi" 0 5 0
 

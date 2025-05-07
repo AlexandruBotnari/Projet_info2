@@ -1,2 +1,2 @@
-Ouranos 85 85 40 30 50 4 vent_divin 30 3 "Augmente la vitesse d'un allié pendant 3 tours" 3 4 0
+Ouranos 85 85 40 30 50 4 0 air vent_divin 30 3 "Augmente la vitesse d'un allié pendant 3 tours" 3 4 0
 

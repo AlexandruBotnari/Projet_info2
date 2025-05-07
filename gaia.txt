@@ -1,1 +1,1 @@
-Gaïa 110 110 35 55 20 2 bouclier_minéral 40 2 "Augmente la défense d’un allié de 40 pendant 3 tours" 3 4 0
+Gaïa 110 110 35 55 20 2 0 terre bouclier_minéral 40 2 "Augmente la défense d’un allié de 40 pendant 3 tours" 3 4 0

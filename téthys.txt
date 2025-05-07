@@ -1,1 +1,1 @@
-Thétys 95 95 28 38 32 3 bénédiction_des_mers 55 4 "Rend 55 PV à un allié" 0 4 0
+Thétys 95 95 28 38 32 3 0 eau bénédiction_des_mers 55 4 "Rend 55 PV à un allié" 0 4 0

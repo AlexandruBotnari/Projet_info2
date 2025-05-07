@@ -1,1 +1,1 @@
-Déméter 100 100 30 40 35 3 souffle_verdoyant 60 4 "Soigne un allié de 60 PV" 0 4 0
+Déméter 100 100 30 40 35 3 0 plante souffle_verdoyant 60 4 "Soigne un allié de 60 PV" 0 4 0

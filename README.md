@@ -1,19 +1,33 @@
-# Projet_info2
+# Projet Info2
 
-## Description
-Ce projet propose une simulation de combats mythologiques en C.
-Chaque divinité et environnement est décrit dans un fichier `.txt` et modélisé par des modules C dédiés.
-L'objectif est de permettre à deux équipes de combattants de s'affronter dans différents environnements.
+Ce projet implémente en C une **simulation de combats mythologiques au tour par tour** pour 1 ou 2 joueurs.  
+Chaque joueur constitue son équipe en sélectionnant des combattants prédéfinis, chargés depuis des fichiers `data/*.txt`, puis s’affronte jusqu’à ce qu’une équipe soit complètement mise K.O.
 
-## Prérequis
-* **GCC** (ou tout autre compilateur C compatible ANSI C)
-* **make**
-* Système d'exploitation Unix/Linux ou macOS
+## Contenu du projet
 
-## Installation & Compilation
-# Cloner le dépôt
-git clone https://<votre-repo>/Projet_info2.git
-cd Projet_info2
+Le dépôt contient :
+
+- **README.md** : documentation (ce fichier).
+- **Makefile** : script de compilation.
+- **src/** : code source en C :
+  - `combat.c`, `combat.h` : logique de simulation de combat
+  - `combattant.c`, `combattant.h` : chargement et gestion des entités
+  - `equipe.c`, `equipe.h` : assemblage des équipes
+  - `environnement.c`, `environnement.h` : effets et modificateurs globaux
+  - `technique.c`, `technique.h` : stratégies de combat
+  - `interface.c`, `interface.h` : affichage et options CLI
+- **data/** : fichiers `.txt` décrivant les divinités et les environnements :
+  - `template_divinite.txt`
+  - `template_env.txt`
+- **bin/** : dossier contenant le binaire produit (`projet`).
+
+## Installation
+
+1. Cloner le dépôt :
+   ```bash
+   git clone https://<votre-repo>/Projet_info2.git
+   cd Projet_info2
+
 
 # Compiler le projet
 gmake # ou make

@@ -38,8 +38,8 @@ Le dépôt contient les fichiers suivants :
 make
 
 
-## Utilisation
-# Lancer le programme
+# Utilisation
+## Lancer le programme
 ./bin/projet
 
 Exemple de simulation avec équipes définies :

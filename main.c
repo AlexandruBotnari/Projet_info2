@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include "combattant.h"
 #include "equipe.h"
+#include "technique.h"
+#include "combat.h"
+#include "environnement.h"
+#include <time.h>
 
 int main() {
 	Equipe e1=creer_equipe();

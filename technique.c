@@ -4,7 +4,7 @@
 #include "combattant.h"
 #include "environnement.h"
 
-TechniqueSpeciale charger_TechniqueSpeciale(char *chemin_fichier){
+TechniqueSpeciale charger_TechniqueSpeciale(const char *chemin_fichier){
 	TechniqueSpeciale t;
 	FILE* f;
 	f=fopen(chemin_fichier,"r");

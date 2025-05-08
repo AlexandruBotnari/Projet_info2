@@ -10,10 +10,9 @@ typedef struct {
     int defense;
     int agilite;
     int vitesse;
-    TechniqueSpeciale techniques[5];
-    int nb_techniques;
-    char element[50];
     int charge;
+    char element[50];
+    TechniqueSpeciale technique;
     int attaque_base;
     int defense_base;
     int vitesse_base;
@@ -24,7 +23,7 @@ typedef struct {
 }Combattant;
 int choix_personnage();
 void afficher_combattant(Combattant c);
-Combattant charger_combattant(char *chemin_fichier);
+Combattant charger_combattant(const char *chemin_fichier);
 
 #endif
 

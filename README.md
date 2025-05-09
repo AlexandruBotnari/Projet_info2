@@ -44,6 +44,7 @@ Au lancement, l’application demande successivement à chaque joueur de choisir
 Suivez les instructions à l’écran et entrez les indices correspondant aux divinités pour constituer vos équipes.
 
 Lancer le programme :
+```
 ./projet
 
 ## Fichiers de données 

@@ -30,7 +30,7 @@ Le dépôt contient les fichiers suivants :
 Cloner le dépôt :
    ```bash
    git clone https://<votre-repo>/Projet_info2.git
-   cd Projet_info2
+   cd Projet_info2 ```
 
 
 Compiler le projet

@@ -3,6 +3,7 @@
 #include <time.h>
 #include <string.h>
 #include <math.h>
+#include <unistd.h> 
 typedef struct {
     char nom[50];
     char description[200];
@@ -66,7 +67,66 @@ void jouer_tour(Equipe *e1, Equipe *e2, Environnement *env);
 void jouer_combat(Equipe *e1, Equipe *e2, Environnement *env);
 void utiliser_technique_speciale(Combattant *utilisateur, Equipe *equipe_joueur, Equipe *equipe_adverse, Environnement *env);
 int calculer_degats_generique(int valeur_base, int valeur_defense, const char *element_attaquant, const char *element_defenseur, Environnement *env);
+void clearTerminal(){
+	system("clear");
+}
 
+int afficherMenu() {
+	int k=0;
+	clearTerminal();
+    	while(k!=1){
+    		printf("=====================================\n");
+    		printf("      ⚔️ Combat Mythologique 3v3 ⚔️    \n");
+    		printf("=====================================\n");
+    		printf("1. Démarrer une nouvelle partie\n");
+    		printf("2. Voir la liste des combattants\n");
+    		printf("3. Règles du jeu\n");
+    		printf("4. Quitter\n");
+    		printf("=====================================\n");
+    		do {
+    			printf("👉 Faites votre choix : ");
+    			scanf("%d",&k);
+    			clearTerminal();
+    			while(getchar() != '\n'); 
+    		} while (k != 1 && k != 2 && k != 3 && k != 4 );
+    		if (k==2){
+    			printf("Quel personnage voulez-vous ?\n"
+       "🏹 Artémis\n"
+       "🌋 Atlas\n"
+       "🌾 Déméter\n"
+       "🌱 Gaïa\n"
+       "☀️ Hélios\n"
+       "🔥 Héphaïstos\n"
+       "💨 Ouranos\n"
+       "🌊 Poséidon\n"
+       "💧 Téthys\n"
+       "⚡ Zeus\n");
+       int milo=0;
+               		do {
+               			
+    				printf("1: Sortir👋 \n ");
+    				scanf("%d",&milo);
+    				while(getchar() != '\n'); 
+    			} while (milo != 1);
+        	}
+        	if (k==3){
+    			printf("Le but est de vaincre l'adversaire à travers des attaques et des techniques spéciales\n");
+    			int m=0;
+    			do {
+    				printf("1: Sortir👋 \n ");
+    				scanf("%d",&m);
+    				while(getchar() != '\n'); 
+    			} while (m != 1);
+        	}
+        	if (k==4){
+        		printf("😢\n");
+        		clearTerminal();
+        		exit(0);
+        	}
+        	clearTerminal();
+}  		
+    	 
+}
 Environnement choix_environnement() {
     int p;
     Environnement env;
@@ -134,6 +194,7 @@ void afficher_combattant(Combattant c) {
 int choix_personnage() {
     int p;
     do {
+    	clearTerminal();
         printf("Quel personnage voulez-vous ?\n"
                "0: Artémis\n1: Atlas\n2: Déméter\n3: Gaia\n4: Hélios\n"
                "5: Héphaistos\n6: Ouranos\n7: Poséidon\n8: Téthys\n9: Zeus\n");
@@ -200,11 +261,12 @@ Equipe creer_equipe() {
 }
 
 void afficher_equipe(Equipe *e) {
-    printf("\nÉquipe : %s\n", e->nom);
-    for (int i = 0; i < e->nb_combattants; i++) {
-        printf("Combattant %d : ", i + 1);
-        printf("%s\n",e->combattants[i].nom);
-    }
+	clearTerminal();
+    	printf("Équipe : %s\n", e->nom);
+    	for (int i = 0; i < e->nb_combattants; i++) {
+        	printf("Combattant %d : ", i + 1);
+        	printf("%s\n",e->combattants[i].nom);
+    	}
 }
 
 int equipe_est_vaincue(Equipe *e) {
@@ -261,9 +323,10 @@ void jouer_tour(Equipe *e1, Equipe *e2, Environnement *env) {
     // Exécution des actions
     for (int i = 0; i < index; i++) {
         Combattant *c = ordre[i].combattant;
+        Equipe *pasbon = ordre[i].equipe_att;
         if (c->charge >= 4 && c->vie_courante > 0) {
             c->charge = 0;
-            printf("\n✅ %s est prêt à attaquer !\n", c->nom);
+            printf("\n✅ %s de l'équipe %s est prêt à attaquer !\n", c->nom, pasbon->nom);
             if(c->technique.recharge_restante == 0){
             	int choix;
 	    		do {
@@ -318,8 +381,8 @@ void jouer_tour(Equipe *e1, Equipe *e2, Environnement *env) {
 }
            
 void afficher_equipe_tour(Equipe *e) {
-    printf("\nÉquipe : %s\n", e->nom);
-    for (int i = 0; i < e->nb_combattants; i++) {
+   	printf("Équipe : %s\n", e->nom);
+    	for (int i = 0; i < e->nb_combattants; i++) {
         printf("Combattant %d : ", i + 1);
         printf("%s\n",e->combattants[i].nom);
         printf("Vie: %d/%d\n", e->combattants[i].vie_courante, e->combattants[i].vie_max);
@@ -447,11 +510,24 @@ int calculer_degats_generique(int valeur_base,int valeur_defense,const char *ele
 }
 void jouer_combat(Equipe *e1, Equipe *e2, Environnement *env) {
     srand(time(NULL));
+    int nb_tours=0;
     while (!equipe_est_vaincue(e1) && !equipe_est_vaincue(e2)) {
+    	clearTerminal();
+    	nb_tours++;
+    	printf("Tours: %d\n",nb_tours);
         jouer_tour(e1, e2, env);
-        printf("\n--- État après ce tour ---\n");
+        sleep(1);
+        printf("\n--- État après ce tour ---\n\n");
+       	 sleep(1);
         afficher_equipe_tour(e1);
         afficher_equipe_tour(e2);
+        int k=0;
+        do {
+    		printf("On passe au prochain tour?\n1-Oui✅\n2-Non❌\n");
+    		scanf("%d",&k);
+    		while(getchar() != '\n'); 
+    	} while (k != 1);
+        
     }
     if (equipe_est_vaincue(e1)) {
         printf("\n🏆 Victoire de l'équipe %s !\n", e2->nom);
@@ -462,11 +538,39 @@ void jouer_combat(Equipe *e1, Equipe *e2, Environnement *env) {
 
 int main(){
 	afficherMenu();
-    Equipe e1 = creer_equipe();
-    afficher_equipe(&e1);
-    Equipe e2 = creer_equipe();
-    afficher_equipe(&e2);
-    Environnement env=choix_environnement();
-    jouer_combat(&e1, &e2, &env);
-    return 0;
+    	Equipe e1 = creer_equipe();
+    	afficher_equipe(&e1);
+    	int k=0;
+    	do {
+    		printf("On passe à l'équipe 2?\n1-Oui✅\n2-Non❌\n");
+    		scanf("%d",&k);
+    		if (k==2){
+    			printf("pas possible🦧\n");
+    		}
+    		while(getchar() != '\n'); 
+    		} while (k != 1);
+    	clearTerminal();
+    	Equipe e2 = creer_equipe();
+    	afficher_equipe(&e2);
+    	do {
+    		printf("On passe à l'environnement?\n1-Oui✅\n2-Non❌\n");
+    		scanf("%d",&k);
+    		if (k==2){
+    			printf("pas possible🦧\n");
+    		}
+    		while(getchar() != '\n'); 
+    		} while (k != 1);
+    	clearTerminal();
+    	Environnement env=choix_environnement();
+    	printf("%s a été choisie, le combat peut commencer ⚔️\n",env.nom);
+    	sleep(2);
+    	clearTerminal();
+    	printf("=====================================\n");
+    	printf("      ⚔️ Combat Mythologique 3v3 ⚔️    \n");
+    	printf("=====================================\n");
+    	sleep(4);
+    	clearTerminal();
+    	jouer_combat(&e1, &e2, &env);
+    	return 0;
 }
+

@@ -1,6 +1,6 @@
 # Projet Info2
 
-Ce projet implémente en C une **simulation de combats mythologiques au tour par tour** pour 1 ou 2 joueurs.  
+Ce projet implémente en C une **simulation de combats mythologiques au tour par tour** pour 2 joueurs.  
 Chaque joueur constitue son équipe en sélectionnant des combattants prédéfinis, chargés depuis des fichiers `data/*.txt`, puis s’affronte jusqu’à ce qu’une équipe soit complètement mise K.O.
 
 ---

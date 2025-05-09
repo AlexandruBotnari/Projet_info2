@@ -60,7 +60,6 @@ Orage Feu Terre 1.5 -0.3
 ```
 
 **Ordre des valeurs attendues :**
-rojet
 ```txt
 Nom ElementAvantage ElementDesavantage Bonus Malus
 ```

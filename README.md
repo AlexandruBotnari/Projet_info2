@@ -48,6 +48,8 @@ Suivez les instructions à l’écran et entrez les indices correspondant aux di
 Lancer le programme :
 ```bash
 ./projet
+```bash
+
 
 ## Fichiers de données 
 Les fichiers .txt du dossier data/ contiennent les caractéristiques des divinités et des environnements.

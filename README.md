@@ -51,20 +51,13 @@ Options disponibles
 # Fichiers de données
 Les fichiers .txt du dossier data/ contiennent les caractéristiques des divinités et des environnements.
 
-Exemple pour une divinité :
+Exemple de fichier divinité :
+Zeus 100 100 25 10 15 20 Foudre
 
-Name: Zeus
-Health: 100
-Attack: 25
-Defense: 10
-Special: Foudre
 
-Exemple pour un environnement :
+Exemple de fichier environnement :
+Montagne -10 0 5
 
-Name: Montagne
-HealthMod: -10
-AttackMod: 0
-DefenseMod: 5
 
 ## Configuration des données
 * Les fichiers `.txt` contiennent les caractéristiques des divinités (ex. : `Zeus.txt`, `Artémis.txt`, …) et des environnements (`montagne.txt`, `orage.txt`, …).

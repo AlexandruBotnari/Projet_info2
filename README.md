@@ -57,7 +57,7 @@ Zeus 100 100 62 28 42 4 0 foudre jugement_éclair 115 0 "Frappe l’ennemi d’u
 ### Exemple de fichier environnement
 
 ```txt
-Orage Feu Terre 1.5 -0.3
+olympe terre foudre 1.2 0.8
 ```
 
 **Ordre des valeurs attendues :**

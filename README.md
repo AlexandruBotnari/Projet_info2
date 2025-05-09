@@ -59,11 +59,6 @@ Zeus 100 100 62 28 42 4 0 foudre jugement_éclair 115 0 "Frappe l’ennemi d’u
 olympe terre foudre 1.2 0.8
 ```
 
-**Ordre des valeurs attendues :**
-```txt
-Nom VieMax VieCourante Attaque Défense Agilité Vitesse Charge Élément NomTechnique DégâtsTechnique CoûtTechnique DescriptionTechnique BuffAttaque BuffDéfense BuffVitesse
-```
-
 ## Configuration des données
 * Les fichiers `.txt` contiennent les caractéristiques des divinités (ex. : `Zeus.txt`, `Artémis.txt`, …) et des environnements (`montagne.txt`, `orage.txt`, …).
 * Pour ajouter un combattant ou un environnement, éditez ou créez un fichier `.txt` au même format.

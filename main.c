@@ -6,13 +6,14 @@
 #include "environnement.h"
 #include <time.h>
 
-int main() {
-	Equipe e1=creer_equipe();
-	afficher_equipe(e1);
-	Equipe e2=creer_equipe();
-	afficher_equipe(e2);
-	
-
-	return 0;
+int main(){
+	afficherMenu();
+    Equipe e1 = creer_equipe();
+    afficher_equipe(&e1);
+    Equipe e2 = creer_equipe();
+    afficher_equipe(&e2);
+    Environnement env=choix_environnement();
+    jouer_combat(&e1, &e2, &env);
+    return 0;
 }
 	

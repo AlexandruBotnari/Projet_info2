@@ -72,7 +72,6 @@ Olympe terre foudre 1.2 0.8
 
 ## Configuration des données
 * Les fichiers `.txt` contiennent les caractéristiques des divinités (ex. : `Zeus.txt`, `Artémis.txt`, …) et des environnements (`montagne.txt`, `orage.txt`, …).
-* Pour ajouter un combattant ou un environnement, éditez ou créez un fichier `.txt` au même format.
 
 ## Structure du projet
 ```

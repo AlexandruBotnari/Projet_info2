@@ -66,7 +66,7 @@ Nom VieMax VieCourante Attaque Défense Agilité Vitesse Charge Élément NomTec
 
 ## Configuration des données
 * Les fichiers `.txt` contiennent les caractéristiques des divinités (ex. : `Zeus.txt`, `Artémis.txt`, …) et des environnements (`montagne.txt`, `orage.txt`, …).
-* Pour ajouter ou modcouleurs_console.hifier un combattant ou un environnement, éditez ou créez un fichier `.txt` au même format.
+* Pour ajouter un combattant ou un environnement, éditez ou créez un fichier `.txt` au même format.
 
 ## Structure du projet
 Projet_info2/

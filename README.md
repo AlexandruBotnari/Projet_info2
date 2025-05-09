@@ -12,14 +12,14 @@ Le dépôt contient les fichiers suivants :
 - **README.md** : documentation (ce fichier).
 - **Makefile** : script de compilation et exécution.
 - **Fichiers source en C** : code source en C :
-  - main.c : point d'entrée 
+  - `main.c` : point d'entrée 
   - `combat.c`, `combat.h` : logique de simulation de combat
   - `combattant.c`, `combattant.h` : chargement et gestion des entités
   - `equipe.c`, `equipe.h` : assemblage des équipes
   - `environnement.c`, `environnement.h` : effets et modificateurs globaux
   - `technique.c`, `technique.h` : stratégies de combat
   - `interface.c`, `interface.h` : affichage et options CLI
-  -  couleurs_console.h : gestion des couleurs
+  -  `couleurs_console.h` : gestion des couleurs
   
 - **Fichiers de données** (`.txt`) décrivant les divinités et environnements :
   - Artémis.txt, Atlas.txt, Déméter.txt, Héphaistos.txt, Ouranos.txt, Poséidon.txt, Téthys.txt, Zeus.txt, etc.

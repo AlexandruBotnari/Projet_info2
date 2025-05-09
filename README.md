@@ -54,15 +54,20 @@ Lancer le programme :
 ## Fichiers de données 
 Les fichiers .txt du dossier data/ contiennent les caractéristiques des divinités et des environnements.
 
+## Fichiers de données
+
+Les fichiers `.txt` du dossier `data/` contiennent les caractéristiques des divinités et des environnements.
+
 ### Exemple de fichier divinité
+
 ```txt
 Zeus 100 100 62 28 42 4 0 foudre jugement_éclair 115 0 "Frappe l’ennemi d’un éclair dévastateur" 0 5 0
-
+```
 
 ### Exemple de fichier environnement
 
 ```txt
-olympe terre foudre 1.2 0.8
+Orage Feu Terre 1.5 -0.3
 ```
 
 ## Configuration des données

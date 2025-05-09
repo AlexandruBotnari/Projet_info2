@@ -63,6 +63,7 @@ olympe terre foudre 1.2 0.8
 * Pour ajouter un combattant ou un environnement, éditez ou créez un fichier `.txt` au même format.
 
 ## Structure du projet
+```
 Projet_info2/
 ├── src/                  # Code source et en-têtes
 │   ├── main.c

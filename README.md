@@ -26,7 +26,7 @@ Le dépôt contient les fichiers suivants :
   - Aulis.txt, Keraunos.txt, Nysa.txt, Olympe.txt, Thalassa.txt, Orage.txt, etc.
 ---
 
-## Installation
+## Installation & Compilation
 
 Cloner le dépôt :
    ```bash
@@ -62,7 +62,7 @@ olympe terre foudre 1.2 0.8
 
 **Ordre des valeurs attendues :**
 ```txt
-Nom ElementAvantage ElementDesavantage Bonus Malus
+Nom VieMax VieCourante Attaque Défense Agilité Vitesse Charge Élément NomTechnique DégâtsTechnique CoûtTechnique DescriptionTechnique BuffAttaque BuffDéfense BuffVitesse
 ```
 
 ## Configuration des données
@@ -93,9 +93,10 @@ Ce projet étant universitaire, aucune contribution extérieure n’est prévue.
 
 
 ## Auteur
-- THOMAS Milo
 - BOTNARI Alexandru
 - KI-ZERBO William
+- THOMAS Milo
+
 
 
 

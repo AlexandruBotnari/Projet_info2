@@ -2,7 +2,7 @@ PROG = projet
 CC = gcc
 CFLAGS = -Wall -Wextra -g
 
-SRC = main.c combat.c combattant.c equipe.c
+SRC = essai.c
 OBJ = $(SRC:.c=.o)
 
 all: $(PROG)

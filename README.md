@@ -46,15 +46,24 @@ Suivez les instructions à l’écran et entrez les indices correspondant aux di
 Lancer le programme :
 ./projet
 
-# Fichiers de données
+## Fichiers de données
 Les fichiers .txt du dossier data/ contiennent les caractéristiques des divinités et des environnements.
 
 Exemple de fichier divinité :
 Zeus 100 100 25 10 15 20 Foudre
 
 
-Exemple de fichier environnement :
-Montagne -10 0 5
+### Exemple de fichier environnement
+
+```txt
+Orage Feu Terre 1.5 -0.3
+```
+
+**Ordre des valeurs attendues :**
+rojet
+```txt
+Nom ElementAvantage ElementDesavantage Bonus Malus
+```
 
 couleurs_console.h
 ## Configuration des données
@@ -63,17 +72,22 @@ couleurs_console.h
 
 ## Structure du projet
 Projet_info2/
-├── combat.c, combat.h               # Logique de simulation de combat
-├── combattant.c, combattant.h       # Gestion des combattants
-├── equipe.c, equipe.h               # Gestion des équipes
-├── environnement.c, environnement.h # Définition des environnements
-├── technique.c, technique.h         # Techniques et stratégies de combat
-├── couleurs_console.h               # Configuration des couleurs de sortie
-├── interface.c, interface.h         # Affichage sur la console
-├── main.c                           # Point d'entrée
-├── *.txt                            # Fichiers de données (divinités et environnements)
-├── makefile                         # Script de compilation
-└── README.md                        # Documentation du projet
+├── src/                  # Code source et en-têtes
+│   ├── main.c
+│   ├── combat.c, combat.h
+│   ├── combattant.c, combattant.h
+│   ├── equipe.c, equipe.h
+│   ├── environnement.c, environnement.h
+│   ├── technique.c, technique.h
+│   ├── interface.c, interface.h
+│   └── couleurs_console.h
+├── data/                 # Fichiers de configuration (.txt)
+│   ├── Artémis.txt
+│   ├── Atlas.txt
+│   ├── …
+│   └── Orage.txt
+├── Makefile              # Compilation et exécution
+└── README.md             # Documentation du projet
 
 ## Contribuer
 Ce projet étant universitaire, aucune contribution extérieure n’est prévue.

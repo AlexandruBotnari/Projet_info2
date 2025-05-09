@@ -28,8 +28,10 @@ Le dépôt contient les fichiers suivants :
 ## Installation & Compilation
 
 Cloner le dépôt :
-   ``` git clone https://<votre-repo>/Projet_info2.git
-   cd Projet_info2 ```
+```
+git clone https://<votre-repo>/Projet_info2.git
+cd Projet_info2
+```
 
 
 Compiler le projet

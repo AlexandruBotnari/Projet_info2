@@ -11,7 +11,6 @@ Le dépôt contient les fichiers suivants :
 
 - **README.md** : documentation (ce fichier).
 - **Makefile** : script de compilation.
-- **bin/** : dossier contenant le binaire produit (`projet`).
 - **src/** : code source en C :
   - `combat.c`, `combat.h` : logique de simulation de combat
   - `combattant.c`, `combattant.h` : chargement et gestion des entités
@@ -28,22 +27,22 @@ Le dépôt contient les fichiers suivants :
 
 ## Installation
 
-1. Cloner le dépôt :
+Cloner le dépôt :
    ```bash
    git clone https://<votre-repo>/Projet_info2.git
    cd Projet_info2
 
 
-# Compiler le projet
+Compiler le projet
 make
 
 
 # Utilisation
-## Lancer le programme
-./bin/projet
+Lancer le programme :
+./projet
 
 Exemple de simulation avec équipes définies :
-./bin/projet --team1 Zeus,Artemis --team2 Hadès,Poséidon --env Montagne
+./projet --team1 Zeus,Artemis --team2 Hadès,Poséidon --env Montagne
 
 Options disponibles
 --verbose : affiche le détail de chaque round
@@ -86,9 +85,9 @@ Projet_info2/
 └── README.md                        # Documentation du projet
 
 ## Contribuer
-1. Forker le dépôt 
-2. Créer une branche `feature/<nom_feature>` 
-3. Soumettre une Pull Request
+Ce projet étant universitaire, aucune contribution extérieure n’est prévue.
+Cependant, vous pouvez forker le dépôt pour expérimenter localement.
+
 
 ## Auteur
 - THOMAS Milo

@@ -19,7 +19,6 @@ Le dépôt contient les fichiers suivants :
   - `environnement.c`, `environnement.h` : effets et modificateurs globaux
   - `technique.c`, `technique.h` : stratégies de combat
   - `interface.c`, `interface.h` : affichage et options CLI
-  -  `couleurs_console.h` : gestion des couleurs
   
 - **Fichiers de données** (`.txt`) décrivant les divinités et environnements :
   - Artémis.txt, Atlas.txt, Déméter.txt, Héphaistos.txt, Ouranos.txt, Poséidon.txt, Téthys.txt, Zeus.txt, etc.
@@ -79,7 +78,6 @@ Projet_info2/
 │   ├── environnement.c, environnement.h
 │   ├── technique.c, technique.h
 │   ├── interface.c, interface.h
-│   └── couleurs_console.h
 ├── data/                 # Fichiers de configuration (.txt)
 │   ├── Artémis.txt
 │   ├── Atlas.txt

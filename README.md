@@ -80,6 +80,7 @@ Projet_info2/
 │   └── Orage.txt
 ├── Makefile              # Compilation et exécution
 └── README.md             # Documentation du projet
+```
 
 ## Contribuer
 Ce projet étant universitaire, aucune contribution extérieure n’est prévue.

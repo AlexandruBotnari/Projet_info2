@@ -28,23 +28,25 @@ Le dépôt contient les fichiers suivants :
 ## Installation & Compilation
 
 Cloner le dépôt :
-```
+```bash
 git clone https://<votre-repo>/Projet_info2.git
 cd Projet_info2
-
-
-
-Compiler le projet
-make
-La commande `make` compile le code et exécute immédiatement l’exécutable `./projet`.
 ```
 
+Compiler le projet :
+```bash
+make
+```
+
+> La commande `make` compile le code et lance automatiquement l’exécutable `./projet`.
+
 ## Utilisation
+
 Au lancement, l’application demande successivement à chaque joueur de choisir ses combattants à partir de la liste affichée.  
 Suivez les instructions à l’écran et entrez les indices correspondant aux divinités pour constituer vos équipes.
 
 Lancer le programme :
-```
+```bash
 ./projet
 
 ## Fichiers de données 

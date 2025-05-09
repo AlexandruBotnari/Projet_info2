@@ -48,7 +48,7 @@ Suivez les instructions à l’écran et entrez les indices correspondant aux di
 Lancer le programme :
 ```bash
 ./projet
-```bash
+```
 
 
 ## Fichiers de données 

@@ -10,19 +10,19 @@ Chaque joueur constitue son équipe en sélectionnant des combattants prédéfin
 Le dépôt contient les fichiers suivants :
 
 - **README.md** : documentation (ce fichier).
-- **Makefile** : script de compilation.
-- **src/** : code source en C :
+- **Makefile** : script de compilation et exécution.
+- **Fichiers source en C** : code source en C :
   - `combat.c`, `combat.h` : logique de simulation de combat
   - `combattant.c`, `combattant.h` : chargement et gestion des entités
   - `equipe.c`, `equipe.h` : assemblage des équipes
   - `environnement.c`, `environnement.h` : effets et modificateurs globaux
   - `technique.c`, `technique.h` : stratégies de combat
   - `interface.c`, `interface.h` : affichage et options CLI
-- **data/** : fichiers `.txt` décrivant
-- les divinités (ex : `Zeus.txt`, `Athena.txt`, ...)
-- les environnements (ex : `Montagne.txt`, `Orage.txt`)
-- des fichiers modèles : `template_divinite.txt`, `template_env.txt`
-
+  -  main.c
+  -  couleurs_console.h
+- **Fichiers de données** (`.txt`) décrivant les divinités et environnements :
+  - Artémis.txt, Atlas.txt, Déméter.txt, Héphaistos.txt, Ouranos.txt, Poséidon.txt, Téthys.txt, Zeus.txt, etc.
+  - Aulis.txt, Keraunos.txt, Nysa.txt, Olympe.txt, Thalassa.txt, Orage.txt, etc.
 ---
 
 ## Installation
@@ -35,14 +35,16 @@ Cloner le dépôt :
 
 Compiler le projet
 make
+La commande `make` compile le code et exécute immédiatement l’exécutable `projet`.
 
 
-# Utilisation
+
+## Utilisation
+Au lancement, l’application demande successivement à chaque joueur de choisir ses combattants à partir de la liste affichée.  
+Suivez les instructions à l’écran et entrez les indices correspondant aux divinités pour constituer vos équipes.
+
 Lancer le programme :
 ./projet
-
-Exemple de simulation avec équipes définies :
-./projet --team1 Zeus,Artemis --team2 Hadès,Poséidon --env Montagne
 
 # Fichiers de données
 Les fichiers .txt du dossier data/ contiennent les caractéristiques des divinités et des environnements.
@@ -54,10 +56,10 @@ Zeus 100 100 25 10 15 20 Foudre
 Exemple de fichier environnement :
 Montagne -10 0 5
 
-
+couleurs_console.h
 ## Configuration des données
 * Les fichiers `.txt` contiennent les caractéristiques des divinités (ex. : `Zeus.txt`, `Artémis.txt`, …) et des environnements (`montagne.txt`, `orage.txt`, …).
-* Pour ajouter ou modifier un combattant ou un environnement, éditez ou créez un fichier `.txt` au même format.
+* Pour ajouter ou modcouleurs_console.hifier un combattant ou un environnement, éditez ou créez un fichier `.txt` au même format.
 
 ## Structure du projet
 Projet_info2/
@@ -75,7 +77,6 @@ Projet_info2/
 
 ## Contribuer
 Ce projet étant universitaire, aucune contribution extérieure n’est prévue.
-Cependant, vous pouvez forker le dépôt pour expérimenter localement.
 
 
 ## Auteur

@@ -1,12 +1,12 @@
 # CY fighters 3v3
 PROG = projet
 # Sources existantes
-SRC = main.c combat.c combattant.c interface.c technique.c equipe.c environnement.c
+SRC = essai.c
 # Compilation et exécution
 all: $(PROG)
 	./$(PROG)
 # Compilation du programme
-$(PROG): $(SRC) combat.h combattant.h environnement.h interface.h technique.h couleurs_console.h equipe.h
+$(PROG): $(SRC) stdlib.h math.h string.h time.h
 	gcc -Wall -o $(PROG) $(SRC)
 # Nettoyage
 clean:

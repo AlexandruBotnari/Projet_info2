@@ -35,9 +35,8 @@ Cloner le dépôt :
 
 Compiler le projet
 make
-La commande `make` compile le code et exécute immédiatement l’exécutable `projet`.
-
-
+La commande `make` compile le code et exécute immédiatement l’exécutable `./projet`.
+```
 
 ## Utilisation
 Au lancement, l’application demande successivement à chaque joueur de choisir ses combattants à partir de la liste affichée.  

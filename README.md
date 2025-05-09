@@ -52,7 +52,6 @@ Les fichiers .txt du dossier data/ contiennent les caractéristiques des divinit
 
 ### Exemple de fichier divinité
 
-```txt
 Zeus 100 100 62 28 42 4 0 foudre jugement_éclair 115 0 "Frappe l’ennemi d’un éclair dévastateur" 0 5 0
 ```
 

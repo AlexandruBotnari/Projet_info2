@@ -66,27 +66,7 @@ void jouer_tour(Equipe *e1, Equipe *e2, Environnement *env);
 void jouer_combat(Equipe *e1, Equipe *e2, Environnement *env);
 void utiliser_technique_speciale(Combattant *utilisateur, Equipe *equipe_joueur, Equipe *equipe_adverse, Environnement *env);
 int calculer_degats_generique(int valeur_base, int valeur_defense, const char *element_attaquant, const char *element_defenseur, Environnement *env);
-int afficherMenu() {
-	int k;
-	printf("=====================================\n");
-    	printf("      ⚔️ Combat Mythologique 3v3 ⚔️    \n");
-    	printf("=====================================\n");
-    	printf("1. Démarrer une nouvelle partie\n");
-    	printf("2. Voir la liste des combattants\n");
-    	printf("3. Règles du jeu\n");
-    	printf("4. Quitter\n");
-    	printf("=====================================\n");
-    	do {
-    	printf("👉 Faites votre choix : ");
-    	scanf("%d,&k);
-    	} while (k != 1 && k != 2 && k != 3 && k != 4 );
-    	if (k==2){
-    		printf("Quel personnage voulez-vous ?\n"
-               "Artémis\nAtlas\nDéméter\nGaia\nHélios\n"
-               "Héphaistos\nOuranos\nPoséidon\n8: Téthys\n9: Zeus\n");
-    		
-    	 
-}
+
 Environnement choix_environnement() {
     int p;
     Environnement env;

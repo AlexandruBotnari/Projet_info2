@@ -1,13 +1,20 @@
-# CY fighters 3v3
 PROG = projet
-# Sources existantes
-SRC = essai.c
-# Compilation et exécution
+CC = gcc
+CFLAGS = -Wall -Wextra -g
+
+SRC = main.c combat.c combattant.c equipe.c
+OBJ = $(SRC:.c=.o)
+
 all: $(PROG)
+
+$(PROG): $(OBJ)
+	$(CC) $(CFLAGS) -o $@ $^
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+run: all
 	./$(PROG)
-# Compilation du programme
-$(PROG): $(SRC) stdlib.h math.h string.h time.h stdio.h
-	gcc -Wall -o $(PROG) $(SRC)
-# Nettoyage
+
 clean:
-	rm -f $(PROG)
+	rm -f $(OBJ) $(PROG)

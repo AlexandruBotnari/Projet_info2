@@ -12,14 +12,15 @@ Le dépôt contient les fichiers suivants :
 - **README.md** : documentation (ce fichier).
 - **Makefile** : script de compilation et exécution.
 - **Fichiers source en C** : code source en C :
+  - main.c : point d'entrée 
   - `combat.c`, `combat.h` : logique de simulation de combat
   - `combattant.c`, `combattant.h` : chargement et gestion des entités
   - `equipe.c`, `equipe.h` : assemblage des équipes
   - `environnement.c`, `environnement.h` : effets et modificateurs globaux
   - `technique.c`, `technique.h` : stratégies de combat
   - `interface.c`, `interface.h` : affichage et options CLI
-  -  main.c
-  -  couleurs_console.h
+  -  couleurs_console.h : gestion des couleurs
+  
 - **Fichiers de données** (`.txt`) décrivant les divinités et environnements :
   - Artémis.txt, Atlas.txt, Déméter.txt, Héphaistos.txt, Ouranos.txt, Poséidon.txt, Téthys.txt, Zeus.txt, etc.
   - Aulis.txt, Keraunos.txt, Nysa.txt, Olympe.txt, Thalassa.txt, Orage.txt, etc.
@@ -64,7 +65,6 @@ Orage Feu Terre 1.5 -0.3
 Nom ElementAvantage ElementDesavantage Bonus Malus
 ```
 
-couleurs_console.h
 ## Configuration des données
 * Les fichiers `.txt` contiennent les caractéristiques des divinités (ex. : `Zeus.txt`, `Artémis.txt`, …) et des environnements (`montagne.txt`, `orage.txt`, …).
 * Pour ajouter ou modcouleurs_console.hifier un combattant ou un environnement, éditez ou créez un fichier `.txt` au même format.

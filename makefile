@@ -6,7 +6,7 @@ SRC = essai.c
 all: $(PROG)
 	./$(PROG)
 # Compilation du programme
-$(PROG): $(SRC) stdlib.h math.h string.h time.h
+$(PROG): $(SRC) stdlib.h math.h string.h time.h stdlib.h
 	gcc -Wall -o $(PROG) $(SRC)
 # Nettoyage
 clean:

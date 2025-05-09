@@ -18,7 +18,7 @@ Le dépôt contient les fichiers suivants :
   - `equipe.c`, `equipe.h` : assemblage des équipes
   - `environnement.c`, `environnement.h` : effets et modificateurs globaux
   - `technique.c`, `technique.h` : stratégies de combat
-  - `interface.c`, `interface.h` : affichage et options CLI
+  - `interface.c`, `interface.h` : affichage
   
 - **Fichiers de données** (`.txt`) décrivant les divinités et environnements :
   - Artémis.txt, Atlas.txt, Déméter.txt, Héphaistos.txt, Ouranos.txt, Poséidon.txt, Téthys.txt, Zeus.txt, etc.

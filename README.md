@@ -44,10 +44,6 @@ Lancer le programme :
 Exemple de simulation avec équipes définies :
 ./projet --team1 Zeus,Artemis --team2 Hadès,Poséidon --env Montagne
 
-Options disponibles
---verbose : affiche le détail de chaque round
---log <fichier> : exporte les résultats dans un fichier .txt
-
 # Fichiers de données
 Les fichiers .txt du dossier data/ contiennent les caractéristiques des divinités et des environnements.
 

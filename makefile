@@ -23,7 +23,7 @@ OBJ = $(SRC:.c=.o)
 all: $(EXEC)
 
 $(EXEC): $(OBJ)
-	$(CC) $(CFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) -o $@ $^ -lm
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@

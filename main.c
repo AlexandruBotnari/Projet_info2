@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include "combattant.h"
 #include "equipe.h"
-#include "technique.h"
 #include "combat.h"
 #include "environnement.h"
 #include <time.h>

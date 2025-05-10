@@ -5,7 +5,6 @@
 #include <time.h>
 #include <unistd.h>
 #include "combat.h"
-#include "technique.h"
 #include "menu.h" 
 
 int choix_cible_a_attaquer(Equipe *defenseur) {

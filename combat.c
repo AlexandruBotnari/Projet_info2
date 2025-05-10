@@ -2,12 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-#include <unistd.h>
 #include <time.h>
-
 #include "combat.h"
 #include "technique.h"
-#include "menu.h"  // clearTerminal()
+#include "menu.h" 
 
 int choix_cible_a_attaquer(Equipe *defenseur) {
     int i;

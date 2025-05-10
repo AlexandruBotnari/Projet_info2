@@ -33,6 +33,7 @@ typedef struct Combattant {
 void afficher_combattant(Combattant c);
 void afficher_combattant_tempo(Combattant c);
 Combattant charger_combattant(const char *chemin_fichier);
+int choix_personnage();
 
 #endif
 

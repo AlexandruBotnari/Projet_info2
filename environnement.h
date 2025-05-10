@@ -2,15 +2,16 @@
 #define ENVIRONNEMENT_H
 
 typedef struct {
-    char nom[20];
-    char element_avantage[20];
-    char element_desavantage[20];
+    char nom[50];
+    char element_bonus[20];
+    char element_malus[20];
     float bonus;
     float malus;
 } Environnement;
 
-// Déclaration de la fonction de chargement
-Environnement choix_environnement(const char *chemin_fichier);
+Environnement choix_environnement();
+Environnement charger_environnement(const char *chemin_fichier);
 
 #endif
+
 

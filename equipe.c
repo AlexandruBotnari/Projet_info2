@@ -5,9 +5,6 @@
 #include "menu.h"          
 #include "combattant.h" 
 
-extern int choix_personnage(); // fonction définie ailleurs
-extern Combattant charger_combattant(const char *chemin_fichier);
-
 Equipe creer_equipe() {
     Equipe e;
     char *tab_personnage[] = {

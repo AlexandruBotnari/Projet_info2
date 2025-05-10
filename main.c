@@ -7,13 +7,14 @@
 #include <time.h>
 
 int main(){
-	afficherMenu();
+    afficherMenu();
     Equipe e1 = creer_equipe();
     afficher_equipe(&e1);
     Equipe e2 = creer_equipe();
     afficher_equipe(&e2);
-    Environnement env=choix_environnement();
+    Environnement env = choix_environnement();
     jouer_combat(&e1, &e2, &env);
     return 0;
 }
+
 	

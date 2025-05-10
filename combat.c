@@ -1,104 +1,38 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <math.h>
+#include <unistd.h>
 #include <time.h>
+
 #include "combat.h"
-#include "equipe.h"
-#include "combattant.h"
 #include "technique.h"
-#include "environnement.h"
+#include "menu.h"  // clearTerminal()
 
-void jouer_combat(Equipe *e1, Equipe *e2){
-	srand(time(NULL));
-	while (!equipe_est_vaincue(e1) && !equipe_est_vaincue(e2)){
-		jouer_tour(e1,e2);
-		printf("\n--- État après ce tour ---\n");
-        	afficher_equipe(*e1);
-        	afficher_equipe(*e2);
-    	}
-    	if (equipe_est_vaincue(*e1)){
-        	printf("\n🏆 L'équipe %s a gagné !\n", e2->nom);
+int choix_cible_a_attaquer(Equipe *defenseur) {
+    int i;
+    do {
+        printf("Choisissez la cible à attaquer :\n");
+        for (int j = 0; j < 3; j++) {
+            printf("%d: %s (%d PV)\n", j, defenseur->combattants[j].nom, defenseur->combattants[j].vie_courante);
         }
-    	else{
-        	printf("\n🏆 L'équipe %s a gagné !\n", e1->nom);
-	}
+        scanf("%d", &i);
+        while(getchar() != '\n');
+    } while ((i != 0 && i != 1 && i != 2) || defenseur->combattants[i].vie_courante <= 0);
+    return i;
 }
 
-
-void jouer_tour(Equipe *e1, Equipe *e2){
-	OrdreCombattant ordre[6];
-	int index=0;
-	for (int i=0;i<3;i++){
-		if(e1->combattants[i].vie_courante > 0) {
-			e1->combattants[i].charge+=e1->combattants[i].vitesse;
-			ordre[index].combattant=&e1->combattants[i];
-			ordre[index].equipe_att=e1;
-			ordre[index].equipe_def=e2;
-			index++;
-		}
-	}
-	for (int i=0;i<3;i++){
-		if(e2->combattants[i].vie_courante > 0) {
-			e2->combattants[i].charge+=e2->combattants[i].vitesse;
-			ordre[index].combattant=&e2->combattants[i];
-			ordre[index].equipe_att=e2;
-			ordre[index].equipe_def=e1;
-			index++;
-		}
-	}
-	for (int i = 0; i < index - 1; i++) {
-        	for (int j = i + 1; j < index; j++) {
-            		if (ordre[i].combattant->agilite < ordre[j].combattant->agilite) {
-                		OrdreCombattant temp = ordre[i];
-                		ordre[i] = ordre[j];
-                		ordre[j] = temp;
-            		}
-        	}
-   	 }
-   	 for (int i=0;i<index;i++){
-   	 	Combattant *c = ordre[i].combattant;
-   	 	if (c->charge>=4 && c->vie_courante>0){
-   	 		c->charge=0;
-   	 		printf("✅ barre chargé, %s est prêt à attaquer\n", c->nom);
-			int d=choix_cible_a_attaquer(ordre[i].equipe_def);
-			Combattant *cible = &ordre[i].equipe_def->combattants[d];
-			int degats=c->attaque-cible->defense;
-			cible->vie_courante -= degats; 
-			if (cible->vie_courante <= 0) {
-    				cible->vie_courante = 0;
-			}
-			printf("%s attaque %s et inflige %d, il lui reste %d pv\n",c->nom, cible->nom, degats, cible->vie_courante);
-		}	
-	}		
-}			
-	
-	
-	
-
-int choix_cible_a_attaquer(Equipe defenseur){
-	int i;
-	printf("Quel numéro de combattant voulez-vous attaquer ?\n");
-	scanf("%d", &i);
-	while (defenseur.combattants[i].vie_courante<1){
-		printf("Personnage mort veuillez en choisir un autre");
-		printf("Quel numéro combattant voulez-vous attaquer ?\n");
-		scanf("%d", &i);
-	}
-	return i;
-}
-
-int calculer_degats_generique(int valeur_base,int valeur_defense,const char *type_attaquant,const char *type_defenseur, Environnement env) {
+int calculer_degats_generique(int valeur_base, int valeur_defense,
+                              const char *element_attaquant, const char *element_defenseur,
+                              Environnement *env) {
     float coeff = 1.0;
 
-    // Bonus environnement : type avantage attaque type désavantage
-    if (strcmp(type_attaquant, env.type_bonus) == 0 &&
-        strcmp(type_defenseur, env.type_malus) == 0) {
-        coeff *= env.coeff_bonus;
-    }
-
-    // Malus environnement : type désavantage attaque type avantage
-    else if (strcmp(type_attaquant, env.type_malus) == 0 &&
-             strcmp(type_defenseur, env.type_bonus) == 0) {
-        coeff *= env.coeff_malus;
+    if (strcmp(element_attaquant, env->element_bonus) == 0 &&
+        strcmp(element_defenseur, env->element_malus) == 0) {
+        coeff *= env->bonus;
+    } else if (strcmp(element_attaquant, env->element_malus) == 0 &&
+               strcmp(element_defenseur, env->element_bonus) == 0) {
+        coeff *= env->malus;
     }
 
     float degats_f = valeur_base - valeur_defense;
@@ -107,36 +41,112 @@ int calculer_degats_generique(int valeur_base,int valeur_defense,const char *typ
     return (int)round(degats_f * coeff);
 }
 
-void fin_tour(Combattant *perso) {
-    // Attaque
-    if (perso->buff_attaque_tours > 0) {
-        perso->buff_attaque_tours--;
-        if (perso->buff_attaque_tours == 0) {
-            perso->attaque = perso->attaque_base;
-            printf("%s perd son bonus d'attaque.\n", perso->nom);
+void jouer_tour(Equipe *e1, Equipe *e2, Environnement *env) {
+    OrdreCombattant ordre[6];
+    int index = 0;
+
+    for (int i = 0; i < 3; i++) {
+        if (e1->combattants[i].vie_courante > 0) {
+            e1->combattants[i].charge += e1->combattants[i].vitesse;
+            ordre[index++] = (OrdreCombattant){&e1->combattants[i], e1, e2};
+        }
+    }
+    for (int j = 0; j < 3; j++) {
+        if (e2->combattants[j].vie_courante > 0) {
+            e2->combattants[j].charge += e2->combattants[j].vitesse;
+            ordre[index++] = (OrdreCombattant){&e2->combattants[j], e2, e1};
         }
     }
 
-    // Défense
-    if (perso->buff_defense_tours > 0) {
-        perso->buff_defense_tours--;
-        if (perso->buff_defense_tours == 0) {
-            perso->defense = perso->defense_base;
-            printf("%s perd son bonus de défense.\n", perso->nom);
+    for (int i = 0; i < index - 1; i++) {
+        for (int j = i + 1; j < index; j++) {
+            if (ordre[i].combattant->agilite < ordre[j].combattant->agilite) {
+                OrdreCombattant tmp = ordre[i];
+                ordre[i] = ordre[j];
+                ordre[j] = tmp;
+            }
         }
     }
 
-    // Vitesse
-    if (perso->buff_vitesse_tours > 0) {
-        perso->buff_vitesse_tours--;
-        if (perso->buff_vitesse_tours == 0) {
-            perso->vitesse = perso->vitesse_base;
-            printf("%s perd son bonus de vitesse.\n", perso->nom);
+    for (int i = 0; i < index; i++) {
+        Combattant *c = ordre[i].combattant;
+        Equipe *att = ordre[i].equipe_att;
+        Equipe *def = ordre[i].equipe_def;
+
+        if (c->charge >= 4 && c->vie_courante > 0) {
+            c->charge = 0;
+            printf("\n✅ %s de l'équipe %s est prêt à attaquer !\n", c->nom, att->nom);
+
+            if (c->technique.recharge_restante == 0) {
+                int choix;
+                do {
+                    printf("Choisir action :\n1 - Attaque normale\n2 - Technique spéciale (%s)\n", c->technique.nom);
+                    scanf("%d", &choix);
+                    while(getchar() != '\n');
+                } while (choix != 1 && choix != 2);
+
+                if (choix == 2) {
+                    utiliser_technique_speciale(c, att, def, env);
+                    continue;
+                }
+            }
+
+            int cible_i = choix_cible_a_attaquer(def);
+            Combattant *cible = &def->combattants[cible_i];
+            int degats = calculer_degats_generique(c->attaque, cible->defense, c->element, cible->element, env);
+            if (degats < 0) degats = 0;
+
+            cible->vie_courante -= degats;
+            if (cible->vie_courante < 0) cible->vie_courante = 0;
+
+            printf("%s attaque %s et inflige %d dégâts. PV restants : %d\n", c->nom, cible->nom, degats, cible->vie_courante);
         }
     }
 
-    // Recharge de la technique spéciale
-    if (perso->techniques.recharge_restante > 0) {
-        perso->techniques.recharge_restante--;
+    for (int i = 0; i < 3; i++) {
+        Combattant *c = &e1->combattants[i];
+
+        if (c->technique.recharge_restante > 0)
+            c->technique.recharge_restante--;
+
+        if (c->buff_attaque_tour > 0 && --c->buff_attaque_tour == 0)
+            c->attaque = c->attaque_base;
+
+        if (c->buff_defense_tour > 0 && --c->buff_defense_tour == 0)
+            c->defense = c->defense_base;
+
+        if (c->buff_agilite_tour > 0 && --c->buff_agilite_tour == 0)
+            c->agilite = c->agilite_base;
     }
 }
+
+void jouer_combat(Equipe *e1, Equipe *e2, Environnement *env) {
+    srand(time(NULL));
+    int nb_tours = 0;
+
+    while (!equipe_est_vaincue(e1) && !equipe_est_vaincue(e2)) {
+        clearTerminal();
+        nb_tours++;
+        printf("Tours : %d\n", nb_tours);
+        jouer_tour(e1, e2, env);
+        sleep(1);
+        printf("\n--- État après ce tour ---\n\n");
+        sleep(1);
+        afficher_equipe_tour(e1);
+        afficher_equipe_tour(e2);
+
+        int k = 0;
+        do {
+            printf("On passe au prochain tour?\n1-Oui✅\n2-Non❌\n");
+            scanf("%d", &k);
+            while(getchar() != '\n');
+        } while (k != 1);
+    }
+
+    if (equipe_est_vaincue(e1)) {
+        printf("\n🏆 Victoire de l'équipe %s !\n", e2->nom);
+    } else {
+        printf("\n🏆 Victoire de l'équipe %s !\n", e1->nom);
+    }
+}
+

@@ -1,0 +1,31 @@
+Rapport de projet informatique – Jeu de combat 3v3 PVP mythologique
+
+1. Présentation de l’équipe et du sujet
+Notre équipe est composée de 3 étudiants en MEF1. 
+Le projet consistait à développer un jeu de combat en 3 contre 3 mettant en scène des personnages mythologiques, chacun avec des types élémentaires (eau, feu, etc.) et des compétences spéciales.
+Le jeu inclut également un système d’environnements influençant les combats par des bonus et malus (ex. : la foudre désavantage l’eau, avantage le feu).
+
+2. Organisation et répartition du travail
+Au départ, nous avons rencontré des difficultés pour structurer et répartir efficacement le projet entre les membres. Finalement, nous avons adopté une organisation adaptée aux forces de chacun :
+•	Le membre le plus expérimenté en programmation C a pris en charge la majorité du codage central, en particulier la gestion du combat principal, l'intégration des modules et l'organisation générale du code.
+•	Les membres moins à l'aise en programmation ont travaillé sur des modules spécifiques bien définis :
+o	Gestion des personnages : création, statistiques et chargement des personnages mythologiques (combattant.c).
+o	Gestion des techniques spéciales : définition des compétences spécifiques de chaque personnage (technique.c).
+o	Gestion des environnements : implémentation des bonus et malus liés aux différents environnements (environnement.c).
+o	Rédaction complète et mise en forme du fichier README.md contenant les instructions claires pour compiler, lancer et utiliser le jeu.
+Les tâches de test, documentation complémentaire et revue du code ont été effectuées collectivement, afin d'assurer une bonne cohésion d'ensemble et permettre à tous les membres de s’approprier pleinement le projet.
+Cette répartition du travail nous a permis de progresser efficacement tout en tenant compte des compétences de chacun.
+
+3. Problèmes rencontrés et solutions apportées
+•	Problème d’organisation initiale : on ne savait pas comment découper le projet.
+→ Solution : écrire une liste de toutes les fonctionnalités à coder, puis les assigner à chacun.
+•	Fonction technique spéciale : nous avons eu du mal à gérer les effets spécifiques selon chaque personnage.
+→ Solution : créer une structure TechniqueSpeciale avec des champs pour le nom, la description, l’effet, le type et l’impact. On a ajouté un système de conditions dans le combat pour appliquer les effets selon le type et l’environnement.
+•	Intégration : parfois nos fichiers texte n’étaient pas compatibles
+→ Solution : on a adopté des règles claires pour nommer les fichiers personnages et environnements.
+
+4. Résultat final
+Nous avons abouti à un jeu fonctionnel, jouable en console, dans lequel :
+•	Deux joueurs peuvent constituer leur équipe
+•	Les personnages ont des statistiques variables et des attaques spéciales
+•	L’environnement influe sur les combats

@@ -5,6 +5,7 @@
 #include "combat.h"
 #include "environnement.h"
 #include <time.h>
+#include "menu.h"
 
 int main(){
     afficherMenu();

@@ -23,7 +23,6 @@ int afficherMenu() {
         do {
             printf("👉 Faites votre choix : ");
             scanf("%d", &k);
-            clearTerminal();
             while(getchar() != '\n');
         } while (k < 1 || k > 4);
 

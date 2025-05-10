@@ -1,20 +1,35 @@
-PROG = projet
-CC = gcc
-CFLAGS = -Wall -Wextra -g
+# Nom de l'exécutable
+EXEC = combat3v3
 
-SRC = essai.c
+# Compilateur
+CC = gcc
+
+# Options de compilation
+CFLAGS = -Wall -Wextra -std=c99 -g
+
+# Fichiers sources (sans technique.c)
+SRC = main.c \
+      combattant.c \
+      equipe.c \
+      environnement.c \
+      combat.c \
+      menu.c
+
+# Fichiers objets
 OBJ = $(SRC:.c=.o)
 
-all: $(PROG)
+# Cibles
 
-$(PROG): $(OBJ)
+all: $(EXEC)
+
+$(EXEC): $(OBJ)
 	$(CC) $(CFLAGS) -o $@ $^
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-run: all
-	./$(PROG)
-
 clean:
-	rm -f $(OBJ) $(PROG)
+	rm -f *.o $(EXEC)
+
+re: clean all
+

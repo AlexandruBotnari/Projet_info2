@@ -4,9 +4,11 @@
 #include <math.h>
 #include <time.h>
 #include <unistd.h>
-#include "combat.h"
-#include "menu.h" 
 
+#include "combat.h"
+#include "menu.h"
+
+// 🔍 Choisir une cible vivante dans l'équipe adverse
 int choix_cible_a_attaquer(Equipe *defenseur) {
     int i;
     do {
@@ -15,16 +17,18 @@ int choix_cible_a_attaquer(Equipe *defenseur) {
             printf("%d: %s (%d PV)\n", j, defenseur->combattants[j].nom, defenseur->combattants[j].vie_courante);
         }
         scanf("%d", &i);
-        while(getchar() != '\n');
-    } while ((i != 0 && i != 1 && i != 2) || defenseur->combattants[i].vie_courante <= 0);
+        while(getchar() != '\n'); // vide le buffer clavier
+    } while ((i < 0 || i > 2) || defenseur->combattants[i].vie_courante <= 0);
     return i;
 }
 
+// 🔢 Calcul des dégâts en tenant compte de l’environnement
 int calculer_degats_generique(int valeur_base, int valeur_defense,
                               const char *element_attaquant, const char *element_defenseur,
                               Environnement *env) {
     float coeff = 1.0;
 
+    // Bonus/Malus environnemental
     if (strcmp(element_attaquant, env->element_bonus) == 0 &&
         strcmp(element_defenseur, env->element_malus) == 0) {
         coeff *= env->bonus;
@@ -36,13 +40,15 @@ int calculer_degats_generique(int valeur_base, int valeur_defense,
     float degats_f = valeur_base - valeur_defense;
     if (degats_f < 1.0f) degats_f = 1.0f;
 
-    return (int)round(degats_f * coeff);
+    return (int)round(degats_f * coeff); // conversion en int arrondi
 }
 
+// 🎯 Tour complet : chaque combattant prêt peut agir
 void jouer_tour(Equipe *e1, Equipe *e2, Environnement *env) {
     OrdreCombattant ordre[6];
     int index = 0;
 
+    // 📥 Remplissage de l'ordre des combattants vivants
     for (int i = 0; i < 3; i++) {
         if (e1->combattants[i].vie_courante > 0) {
             e1->combattants[i].charge += e1->combattants[i].vitesse;
@@ -56,6 +62,7 @@ void jouer_tour(Equipe *e1, Equipe *e2, Environnement *env) {
         }
     }
 
+    // 🔄 Tri des combattants par agilité décroissante
     for (int i = 0; i < index - 1; i++) {
         for (int j = i + 1; j < index; j++) {
             if (ordre[i].combattant->agilite < ordre[j].combattant->agilite) {
@@ -66,15 +73,17 @@ void jouer_tour(Equipe *e1, Equipe *e2, Environnement *env) {
         }
     }
 
+    // 🗡️ Exécution des actions de chaque combattant
     for (int i = 0; i < index; i++) {
         Combattant *c = ordre[i].combattant;
         Equipe *att = ordre[i].equipe_att;
         Equipe *def = ordre[i].equipe_def;
 
         if (c->charge >= 4 && c->vie_courante > 0) {
-            c->charge = 0;
+            c->charge = 0; // prêt à attaquer
             printf("\n✅ %s de l'équipe %s est prêt à attaquer !\n", c->nom, att->nom);
 
+            // Choix entre attaque normale ou technique spéciale
             if (c->technique.recharge_restante == 0) {
                 int choix;
                 do {
@@ -85,10 +94,11 @@ void jouer_tour(Equipe *e1, Equipe *e2, Environnement *env) {
 
                 if (choix == 2) {
                     utiliser_technique_speciale(c, att, def, env);
-                    continue;
+                    continue; // ne fait pas d'attaque normale si technique choisie
                 }
             }
 
+            // 💥 Attaque normale
             int cible_i = choix_cible_a_attaquer(def);
             Combattant *cible = &def->combattants[cible_i];
             int degats = calculer_degats_generique(c->attaque, cible->defense, c->element, cible->element, env);
@@ -101,6 +111,7 @@ void jouer_tour(Equipe *e1, Equipe *e2, Environnement *env) {
         }
     }
 
+    // 🔁 Mise à jour des effets temporaires (buffs, recharges) pour e1
     for (int i = 0; i < 3; i++) {
         Combattant *c = &e1->combattants[i];
 
@@ -118,8 +129,9 @@ void jouer_tour(Equipe *e1, Equipe *e2, Environnement *env) {
     }
 }
 
+// ⚔️ Boucle principale du combat
 void jouer_combat(Equipe *e1, Equipe *e2, Environnement *env) {
-    srand(time(NULL));
+    srand(time(NULL)); // pour les appels aléatoires futurs si besoin
     int nb_tours = 0;
 
     while (!equipe_est_vaincue(e1) && !equipe_est_vaincue(e2)) {
@@ -128,11 +140,14 @@ void jouer_combat(Equipe *e1, Equipe *e2, Environnement *env) {
         printf("Tours : %d\n", nb_tours);
         jouer_tour(e1, e2, env);
         sleep(1);
+
+        // Affichage de l’état des deux équipes
         printf("\n--- État après ce tour ---\n\n");
         sleep(1);
         afficher_equipe_tour(e1);
         afficher_equipe_tour(e2);
 
+        // Pause entre les tours
         int k = 0;
         do {
             printf("On passe au prochain tour?\n1-Oui✅\n2-Non❌\n");
@@ -141,6 +156,7 @@ void jouer_combat(Equipe *e1, Equipe *e2, Environnement *env) {
         } while (k != 1);
     }
 
+    // 🏁 Fin du combat
     if (equipe_est_vaincue(e1)) {
         printf("\n🏆 Victoire de l'équipe %s !\n", e2->nom);
     } else {
@@ -148,9 +164,11 @@ void jouer_combat(Equipe *e1, Equipe *e2, Environnement *env) {
     }
 }
 
+// ✨ Application d'une technique spéciale (attaque ou effet)
 void utiliser_technique_speciale(Combattant *utilisateur, Equipe *equipe_joueur, Equipe *equipe_adverse, Environnement *env) {
     TechniqueSpeciale *tech = &utilisateur->technique;
 
+    // ⛔ Vérifie la recharge
     if (tech->recharge_restante > 0) {
         printf("%s ne peut pas utiliser %s (recharge restante : %d tours).\n",
                utilisateur->nom, tech->nom, tech->recharge_restante);
@@ -159,10 +177,13 @@ void utiliser_technique_speciale(Combattant *utilisateur, Equipe *equipe_joueur,
 
     Combattant *cible = NULL;
 
+    // 🎯 Choix de la cible
     if (tech->type_effet == 0) {
+        // Attaque ciblée sur un ennemi
         int index = choix_cible_a_attaquer(equipe_adverse);
         cible = &equipe_adverse->combattants[index];
     } else {
+        // Buff ou soin → cible alliée
         int k;
         do {
             printf("Sur quel allié appliquer %s ?\n", tech->nom);
@@ -181,9 +202,11 @@ void utiliser_technique_speciale(Combattant *utilisateur, Equipe *equipe_joueur,
         cible = &equipe_joueur->combattants[k];
     }
 
+    // 💬 Affichage de l'action
     printf("\n🌀 %s utilise %s sur %s !\n", utilisateur->nom, tech->nom, cible->nom);
     printf(">> %s\n", tech->description);
 
+    // 💥 Application de l'effet
     switch (tech->type_effet) {
         case 0: {
             int degats = calculer_degats_generique(
@@ -221,6 +244,6 @@ void utiliser_technique_speciale(Combattant *utilisateur, Equipe *equipe_joueur,
             break;
     }
 
+    // ⏳ Lance la recharge de la technique
     tech->recharge_restante = tech->recharge;
 }
-

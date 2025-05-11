@@ -3,6 +3,7 @@
 #include <string.h>
 #include "combattant.h"
 
+// 🔎 Affiche toutes les infos du combattant, y compris la technique spéciale
 void afficher_combattant_tempo(Combattant c) {
     printf("Nom: %s\n", c.nom);
     printf("Vie: %d/%d\n", c.vie_courante, c.vie_max);
@@ -19,6 +20,7 @@ void afficher_combattant_tempo(Combattant c) {
     printf("tour actifs: %d\n", c.technique.tours_actifs);
 }
 
+// 🧾 Affiche uniquement les infos de base du combattant (pour résumé rapide)
 void afficher_combattant(Combattant c) {
     printf("Nom: %s\n", c.nom);
     printf("Vie: %d/%d\n", c.vie_courante, c.vie_max);
@@ -29,11 +31,13 @@ void afficher_combattant(Combattant c) {
     printf("Élément: %s\n", c.element);
 }
 
+// 📥 Charge un combattant depuis un fichier texte (ex: Artémis.txt)
 Combattant charger_combattant(const char *chemin_fichier) {
     Combattant c;
 
     FILE *f = fopen(chemin_fichier, "r");
     if (f == NULL) {
+        // ⚠️ Si erreur d'ouverture du fichier, retourne un combattant vide
         printf("Erreur fopen\n");
         strcpy(c.nom, "inconnu");
         c.vie_max = c.vie_courante = c.attaque = c.defense = c.agilite = c.vitesse = 0;
@@ -41,6 +45,7 @@ Combattant charger_combattant(const char *chemin_fichier) {
         return c;
     }
 
+    // 📖 Lecture des données dans le bon ordre
     fscanf(f,
         "%63s   %d %d %d %d %d %d %d   %31s   %63s   %d %d   \"%255[^\"]\"   %d %d %d",
         c.nom,
@@ -62,17 +67,26 @@ Combattant charger_combattant(const char *chemin_fichier) {
     );
 
     fclose(f);
+
+    // Affiche les infos complètes pour debug/confirmation
     afficher_combattant_tempo(c);
+
     return c;
 }
 
-int choix_personnage(){
-	int p;
-	printf("Quel personnage voulez vous:\nArtémis : 0\nAtlas: 1\nDéméter : 2\nGaia : 3\nHélios : 4\nHéphaistos : 5\nOuranos : 6\nPoséidon : 7\nTéthys : 8\nZeus : 9\n ");
-	scanf("%d", &p);
-	if ( p < 0 || p > 9) {
-            printf("❌ Choix invalide, essayez encore.\n");
-            while (getchar() != '\n');
-        }
-	return p;
+// 🎮 Menu de sélection de personnage via un index de 0 à 9
+int choix_personnage() {
+    int p;
+    printf("Quel personnage voulez-vous :\n");
+    printf("Artémis : 0\nAtlas : 1\nDéméter : 2\nGaia : 3\nHélios : 4\n");
+    printf("Héphaïstos : 5\nOuranos : 6\nPoséidon : 7\nTéthys : 8\nZeus : 9\n");
+    scanf("%d", &p);
+
+    // ❌ Vérifie si le choix est valide
+    if (p < 0 || p > 9) {
+        printf("❌ Choix invalide, essayez encore.\n");
+        while (getchar() != '\n');
+    }
+
+    return p;
 }
